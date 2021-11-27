@@ -21,8 +21,5 @@ let package = Package(
         .target(
             name: "WelcomeSheet",
             dependencies: []),
-        .testTarget(
-            name: "WelcomeSheetTests",
-            dependencies: ["WelcomeSheet"]),
     ]
 )
