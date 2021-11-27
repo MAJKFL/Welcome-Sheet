@@ -1,9 +1,9 @@
 import SwiftUI
 
-struct WelcomeSheet: ViewModifier {
+public struct WelcomeSheet: ViewModifier {
     @Binding var showSheet: Bool
     
-    func body(content: Content) -> some View {
+    public func body(content: Content) -> some View {
         content
             .sheet(isPresented: $showSheet) {
                 Text("Hello World!")
@@ -11,7 +11,7 @@ struct WelcomeSheet: ViewModifier {
     }
 }
 
-extension View {
+public extension View {
     func welcomeSheet(isPresented showSheet: Binding<Bool>) -> some View {
         modifier(WelcomeSheet(showSheet: showSheet))
     }

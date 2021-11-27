@@ -16,5 +16,6 @@ struct ContentView: View {
             showSheet.toggle()
         }
         .padding()
+        .welcomeSheet(isPresented: $showSheet)
     }
 }
