@@ -13,6 +13,7 @@
 		3A1EC39A2752B0E70005F216 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1EC3882752B0E70005F216 /* ContentView.swift */; };
 		3A1EC39B2752B0E70005F216 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A1EC3892752B0E70005F216 /* Assets.xcassets */; };
 		3A1EC39C2752B0E70005F216 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A1EC3892752B0E70005F216 /* Assets.xcassets */; };
+		3A1EC3A72752B17C0005F216 /* WelcomeSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 3A1EC3A62752B17C0005F216 /* WelcomeSheet */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A1EC3A72752B17C0005F216 /* WelcomeSheet in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +96,9 @@
 			dependencies = (
 			);
 			name = "WelcomeSheetDemo (iOS)";
+			packageProductDependencies = (
+				3A1EC3A62752B17C0005F216 /* WelcomeSheet */,
+			);
 			productName = "WelcomeSheetDemo (iOS)";
 			productReference = 3A1EC38E2752B0E70005F216 /* WelcomeSheetDemo.app */;
 			productType = "com.apple.product-type.application";
@@ -142,6 +147,9 @@
 				Base,
 			);
 			mainGroup = 3A1EC3812752B0E70005F216;
+			packageReferences = (
+				3A1EC3A52752B17C0005F216 /* XCRemoteSwiftPackageReference "WelcomeSheet" */,
+			);
 			productRefGroup = 3A1EC38F2752B0E70005F216 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -452,6 +460,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3A1EC3A52752B17C0005F216 /* XCRemoteSwiftPackageReference "WelcomeSheet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = /Users/jakubflorek/Developer/Apple/WelcomeSheet;
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3A1EC3A62752B17C0005F216 /* WelcomeSheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3A1EC3A52752B17C0005F216 /* XCRemoteSwiftPackageReference "WelcomeSheet" */;
+			productName = WelcomeSheet;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3A1EC3822752B0E70005F216 /* Project object */;
 }
