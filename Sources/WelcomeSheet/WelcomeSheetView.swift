@@ -12,7 +12,8 @@ struct WelcomeSheetView: View {
 
     var body: some View {
         NavigationView {
-            WelcomeSheetPageView(welcomeSheetPage: pages[0])
+            WelcomeSheetPageView(page: pages[0])
+                .navigationBarHidden(true)
         }
     }
 }
