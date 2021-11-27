@@ -1,0 +1,42 @@
+//
+//  File.swift
+//  
+//
+//  Created by Jakub Florek on 27/11/2021.
+//
+
+import SwiftUI
+
+public struct WelcomeSheetPageRow: Identifiable {
+    public var id = UUID()
+    public var title: String
+    public var content: String
+    public var image: Image
+    public var accentColor: Color?
+
+    public init(image: Image, title: String, content: String) {
+        self.image = image
+        self.title = title
+        self.content = content
+    }
+
+    public init(imageSystemName: String, title: String, content: String) {
+        self.image = Image(systemName: imageSystemName)
+        self.title = title
+        self.content = content
+    }
+
+    public init(image: Image, accentColor: Color, title: String, content: String) {
+        self.image = image
+        self.title = title
+        self.content = content
+        self.accentColor = accentColor
+    }
+
+    public init(imageSystemName: String, accentColor: Color, title: String, content: String) {
+        self.image = Image(systemName: imageSystemName)
+        self.title = title
+        self.content = content
+        self.accentColor = accentColor
+    }
+}
