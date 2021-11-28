@@ -8,21 +8,39 @@
 import SwiftUI
 
 struct WelcomeSheetPageView: View {
-    var page: WelcomeSheetPage
-    var restPages: [WelcomeSheetPage]
+    let page: WelcomeSheetPage
+    let restPages: [WelcomeSheetPage]
     
     let screenHeight = UIScreen.main.bounds.height
+    
+    var spacing: CGFloat {
+        if screenHeight == 812 || screenHeight < 736 {
+            return 30
+        } else {
+            return 60
+        }
+    }
+    
+    var topPadding: CGFloat {
+        if screenHeight == 568 {
+            return 50
+        } else if screenHeight <= 736 {
+            return 60
+        } else {
+            return 80
+        }
+    }
     
     var body: some View {
         VStack(spacing: 0) {
             ScrollView {
-                VStack(spacing: 60) {
+                VStack(spacing: spacing) {
                     Text(page.title)
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .lineSpacing(8)
                         .multilineTextAlignment(.center)
-                        .padding(.top, 80)
+                        .padding(.top, topPadding)
                         .fixedSize(horizontal: false, vertical: true)
                     
                     VStack(alignment: .midIcons, spacing: 30) {
@@ -49,7 +67,7 @@ struct WelcomeSheetPageView: View {
                                         .fixedSize(horizontal: false, vertical: true)
                                 }
                             }
-                            .padding(.horizontal, screenHeight == 568 ? 10 : 20)
+                            .padding(.horizontal, 20)
                         }
                     }
                 }
@@ -103,7 +121,7 @@ struct WelcomeSheetPageView: View {
                     .padding(.horizontal, 10)
                 }
             }
-            .padding(.horizontal, screenHeight == 568 ? 10 : 15)
+            .padding(.horizontal, 15)
             .padding(.bottom, 60)
         }
         .ignoresSafeArea(.all, edges: .top)
