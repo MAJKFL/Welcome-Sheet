@@ -17,10 +17,10 @@ struct WelcomeSheetPageView: View {
                 .fontWeight(.bold)
                 .lineSpacing(8)
                 .multilineTextAlignment(.center)
-                .padding(20)
+                .padding(25)
                 .fixedSize(horizontal: false, vertical: true)
             
-            VStack(alignment: .midIcons, spacing: 29) {
+            VStack(alignment: .midIcons, spacing: 30) {
                 ForEach(page.rows) { row in
                     HStack(spacing: 17.5) {
                         row.image
@@ -70,11 +70,14 @@ struct WelcomeSheetPageView: View {
                         Text("Continue")
                             .font(.headline)
                             .foregroundColor(.white)
+                            .padding()
                     }
-                    .clipShape(RoundedRectangle(cornerRadius: 13, style: .continuous))
+                    .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
                 }
                 .buttonStyle(PlainButtonStyle())
                 .padding(.horizontal, 10)
+                
+                Spacer()
             }
             
             Spacer()
