@@ -66,16 +66,15 @@ struct WelcomeSheetPageView: View {
                                     .frame(width: 37, height: 37)
                                     .alignmentGuide(.midIcons) { d in d[HorizontalAlignment.center] }
                                 
-                                VStack(alignment: .leading, spacing: 5) {
+                                VStack(alignment: .leading, spacing: 2) {
                                     Text(row.title)
                                         .font(.headline)
-                                        .lineSpacing(5)
+                                        .lineLimit(2)
                                         .fixedSize(horizontal: false, vertical: true)
                                     
                                     Text(row.content)
                                         .font(.subheadline)
                                         .foregroundColor(.secondary)
-                                        .lineSpacing(5)
                                         .fixedSize(horizontal: false, vertical: true)
                                 }
                             }
