@@ -14,20 +14,30 @@ struct WelcomeSheetPageView: View {
     let screenHeight = UIScreen.main.bounds.height
     
     var spacing: CGFloat {
-        if screenHeight == 812 || screenHeight < 736 {
+        if screenHeight == 812 || screenHeight < 736 { // iPhone mini, Smaller than iPhone plus
             return 30
-        } else {
+        } else { // The rest
             return 60
         }
     }
     
     var topPadding: CGFloat {
-        if screenHeight == 568 {
+        if screenHeight == 568 { // iPhone SE 1st gen
             return 50
-        } else if screenHeight <= 736 {
+        } else if screenHeight <= 736 { // Smaller than iPhone plus
             return 60
-        } else {
+        } else { // The rest
             return 80
+        }
+    }
+    
+    var horizontalPaddingAddend: CGFloat {
+        if screenHeight >= 896 || screenHeight == 736 { // iPhone pro max, iPhone plus
+            return 20
+        } else if screenHeight == 568 { // iPhone SE 1st gen
+            return -10
+        } else { // The rest
+            return 0
         }
     }
     
@@ -67,7 +77,7 @@ struct WelcomeSheetPageView: View {
                                         .fixedSize(horizontal: false, vertical: true)
                                 }
                             }
-                            .padding(.horizontal, 20)
+                            .padding(.horizontal, 20 + horizontalPaddingAddend)
                         }
                     }
                 }
@@ -121,7 +131,7 @@ struct WelcomeSheetPageView: View {
                     .padding(.horizontal, 10)
                 }
             }
-            .padding(.horizontal, 15)
+            .padding(.horizontal, 15 + horizontalPaddingAddend)
             .padding(.bottom, 60)
         }
         .ignoresSafeArea(.all, edges: .top)
