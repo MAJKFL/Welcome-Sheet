@@ -21,21 +21,18 @@ public struct WelcomeSheetPage: Identifiable {
     }
     
     public init(title: String, rows: [WelcomeSheetPageRow], accentColor: Color) {
-        self.title = title
-        self.rows = rows
+        self.init(title: title, rows: rows)
         self.accentColor = accentColor
     }
     
     public init(title: String, rows: [WelcomeSheetPageRow], optionalButtonTitle: String, optionalButtonAction: @escaping () -> Void) {
-        self.title = title
-        self.rows = rows
+        self.init(title: title, rows: rows)
         self.optionalButtonTitle = optionalButtonTitle
         self.optionalButtonAction = optionalButtonAction
     }
     
     public init(title: String, rows: [WelcomeSheetPageRow], accentColor: Color, optionalButtonTitle: String, optionalButtonAction: @escaping () -> Void) {
-        self.title = title
-        self.rows = rows
+        self.init(title: title, rows: rows)
         self.accentColor = accentColor
         self.optionalButtonTitle = optionalButtonTitle
         self.optionalButtonAction = optionalButtonAction

@@ -21,22 +21,16 @@ public struct WelcomeSheetPageRow: Identifiable {
     }
 
     public init(imageSystemName: String, title: String, content: String) {
-        self.image = Image(systemName: imageSystemName)
-        self.title = title
-        self.content = content
+        self.init(image: Image(systemName: imageSystemName), title: title, content: content)
     }
 
     public init(image: Image, accentColor: Color, title: String, content: String) {
-        self.image = image
-        self.title = title
-        self.content = content
+        self.init(image: image, title: title, content: content)
         self.accentColor = accentColor
     }
 
     public init(imageSystemName: String, accentColor: Color, title: String, content: String) {
-        self.image = Image(systemName: imageSystemName)
-        self.title = title
-        self.content = content
+        self.init(image: Image(systemName: imageSystemName), title: title, content: content)
         self.accentColor = accentColor
     }
 }
