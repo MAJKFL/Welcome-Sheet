@@ -6,9 +6,9 @@ public struct WelcomeSheet: ViewModifier {
 
     public func body(content: Content) -> some View {
         content
-            .sheet(isPresented: $showSheet) {
+            .formSheet(isPresented: $showSheet, content: {
                 WelcomeSheetView(pages: pages).environment(\.showingSheet, $showSheet)
-            }
+            })
     }
 }
 

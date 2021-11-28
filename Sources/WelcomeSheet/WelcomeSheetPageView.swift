@@ -127,7 +127,7 @@ struct WelcomeSheetPageView: View {
                     .padding(.top)
                 } else {
                     Button {
-                        showingSheet?.wrappedValue.toggle()
+                        showingSheet?.wrappedValue = false
                     } label: {
                         ZStack {
                             page.accentColor ?? Color.accentColor
