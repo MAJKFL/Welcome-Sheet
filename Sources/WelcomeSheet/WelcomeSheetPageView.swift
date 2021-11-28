@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct WelcomeSheetPageView: View {
+    @Environment(\.showingSheet) var showingSheet
+    
     let page: WelcomeSheetPage
     let restPages: [WelcomeSheetPage]
     
@@ -114,7 +116,7 @@ struct WelcomeSheetPageView: View {
                     .padding(.horizontal, 10)
                 } else {
                     Button {
-                        
+                        showingSheet?.wrappedValue.toggle()
                     } label: {
                         ZStack {
                             page.accentColor ?? Color.accentColor
