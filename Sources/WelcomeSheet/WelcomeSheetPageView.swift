@@ -44,6 +44,16 @@ struct WelcomeSheetPageView: View {
     }
     
     var body: some View {
+        if #available(iOS 14.0, *) {
+            content
+                .ignoresSafeArea(.all, edges: .top)
+        } else {
+            content
+                .edgesIgnoringSafeArea(.top)
+        }
+    }
+    
+    var content: some View {
         VStack(spacing: 0) {
             ScrollView {
                 VStack(spacing: spacing) {
@@ -84,6 +94,7 @@ struct WelcomeSheetPageView: View {
                 }
                 .padding(.horizontal)
             }
+            .scrollOnlyOnOverflow()
             
             VStack(spacing: 5) {
                 if let optionalButtonTitle = page.optionalButtonTitle {
@@ -93,7 +104,7 @@ struct WelcomeSheetPageView: View {
                     .buttonStyle(PlainButtonStyle())
                     .font(Font.headline.weight(.medium))
                     .foregroundColor(page.accentColor ?? Color.accentColor)
-                    .padding()
+                    .padding(.top)
                 }
                 
                 if let nextPage = restPages.first {
@@ -113,6 +124,7 @@ struct WelcomeSheetPageView: View {
                     }
                     .buttonStyle(PlainButtonStyle())
                     .padding(.horizontal, 10)
+                    .padding(.top)
                 } else {
                     Button {
                         showingSheet?.wrappedValue.toggle()
@@ -130,12 +142,12 @@ struct WelcomeSheetPageView: View {
                     }
                     .buttonStyle(PlainButtonStyle())
                     .padding(.horizontal, 10)
+                    .padding(.top)
                 }
             }
             .padding(.horizontal, 15 + horizontalPaddingAddend)
             .padding(.bottom, 60)
         }
-        .ignoresSafeArea(.all, edges: .top)
     }
 }
 
