@@ -12,8 +12,13 @@ struct WelcomeSheetView: View {
 
     var body: some View {
         NavigationView {
-            WelcomeSheetPageView(page: pages[0])
-                .navigationBarHidden(true)
+            if #available(iOS 14.0, *) {
+                WelcomeSheetPageView(page: pages[0])
+                    .navigationBarTitleDisplayMode(.inline)
+            } else {
+                WelcomeSheetPageView(page: pages[0])
+                    .navigationBarTitle(Text(""), displayMode: .inline)
+            }
         }
     }
 }

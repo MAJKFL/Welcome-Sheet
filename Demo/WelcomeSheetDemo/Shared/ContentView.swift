@@ -9,14 +9,14 @@ import SwiftUI
 import WelcomeSheet
 
 struct ContentView: View {
-    @State private var showSheet = false
+    @State private var showSheet = true
     
     let pages = [
-        WelcomeSheetPage(title: "Bajo jajo", rows: [
-            WelcomeSheetPageRow(imageSystemName: "swift", title: "Bajo jajo", content: "Baj jajalsdjflksajflkasjdflkasjdfl"),
-            WelcomeSheetPageRow(imageSystemName: "swift", title: "Bajo jajo", content: "Baj jajalsdjflksajflkasjdflkasjdfl"),
-            WelcomeSheetPageRow(imageSystemName: "swift", title: "Bajo jajo", content: "Baj jajalsdjflksajflkasjdflkasjdfl")
-        ])
+        WelcomeSheetPage(title: "What's New in Translate", rows: [
+            WelcomeSheetPageRow(imageSystemName: "platter.2.filled.iphone", title: "Conversation Views", content: "Choose a side-by-side or face-to-face conversation view."),
+            WelcomeSheetPageRow(imageSystemName: "mic.badge.plus", title: "Auto Translate", content: "Respond in conversations without tapping the microphone button."),
+            WelcomeSheetPageRow(imageSystemName: "iphone", title: "System-Wide Translation", content: "Translate selected text anywhere on your iPhone.")
+        ], optionalButtonTitle: "About Translation & Privacy...", optionalButtonAction: { print("About Translation & Privacy...") })
     ]
     
     var body: some View {

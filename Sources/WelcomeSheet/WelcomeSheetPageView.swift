@@ -11,56 +11,73 @@ struct WelcomeSheetPageView: View {
     var page: WelcomeSheetPage
     
     var body: some View {
-        VStack {
-            Spacer()
-            
+        VStack(spacing: 45) {
             Text(page.title)
                 .font(.largeTitle)
                 .fontWeight(.bold)
+                .lineSpacing(8)
                 .multilineTextAlignment(.center)
-                .padding()
+                .padding(20)
+                .fixedSize(horizontal: false, vertical: true)
             
-            Spacer()
-            
-            VStack(alignment: .midIcons, spacing: 25) {
+            VStack(alignment: .midIcons, spacing: 29) {
                 ForEach(page.rows) { row in
-                    HStack {
+                    HStack(spacing: 17.5) {
                         row.image
                             .renderingMode(.template)
                             .resizable()
                             .scaledToFit()
                             .foregroundColor(row.accentColor ?? Color.accentColor)
-                            .frame(width: 40, height: 40)
-                            .padding()
+                            .frame(width: 37, height: 37)
                             .alignmentGuide(.midIcons) { d in d[HorizontalAlignment.center] }
                         
-                        VStack(alignment: .leading) {
+                        VStack(alignment: .leading, spacing: 5) {
                             Text(row.title)
                                 .font(.headline)
+                                .lineSpacing(5)
                                 .fixedSize(horizontal: false, vertical: true)
                             
                             Text(row.content)
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
+                                .lineSpacing(5)
                                 .fixedSize(horizontal: false, vertical: true)
                         }
                     }
+                    .padding(.horizontal, 20)
                 }
             }
             
             Spacer()
             
-            if let optionalButtonTitle = page.optionalButtonTitle {
-                Button(optionalButtonTitle) {
-                    if let optionalButtonAction = page.optionalButtonAction { optionalButtonAction() }
+            VStack(spacing: 5) {
+                if let optionalButtonTitle = page.optionalButtonTitle {
+                    Button(optionalButtonTitle) {
+                        if let optionalButtonAction = page.optionalButtonAction { optionalButtonAction() }
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    .font(Font.headline.weight(.medium))
+                    .foregroundColor(page.accentColor ?? Color.accentColor)
+                    .padding()
                 }
+                
+                Button {
+                    
+                } label: {
+                    ZStack {
+                        page.accentColor ?? Color.accentColor
+                        
+                        Text("Continue")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                    }
+                    .clipShape(RoundedRectangle(cornerRadius: 13, style: .continuous))
+                }
+                .buttonStyle(PlainButtonStyle())
+                .padding(.horizontal, 10)
             }
             
-            Button {
-                
-            } label: {
-                Text("Continue")
-            }
+            Spacer()
         }
         .padding(.horizontal)
     }
