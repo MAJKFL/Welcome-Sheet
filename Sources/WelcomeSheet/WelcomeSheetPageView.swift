@@ -10,6 +10,10 @@ import SwiftUI
 struct WelcomeSheetPageView: View {
     var page: WelcomeSheetPage
     
+    var hasNotch: Bool {
+        return UIApplication.shared.delegate?.window??.safeAreaInsets.top ?? 0 > 20
+    }
+    
     var body: some View {
         VStack(spacing: 45) {
             Text(page.title)
@@ -48,7 +52,10 @@ struct WelcomeSheetPageView: View {
                 }
             }
             
-            Spacer()
+            if hasNotch {
+                Spacer()
+                    .layoutPriority(1)
+            }
             
             VStack(spacing: 5) {
                 if let optionalButtonTitle = page.optionalButtonTitle {
@@ -72,6 +79,7 @@ struct WelcomeSheetPageView: View {
                             .foregroundColor(.white)
                             .padding()
                     }
+                    .fixedSize(horizontal: false, vertical: true)
                     .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
                 }
                 .buttonStyle(PlainButtonStyle())
@@ -81,6 +89,7 @@ struct WelcomeSheetPageView: View {
             }
             
             Spacer()
+                .layoutPriority(0)
         }
         .padding(.horizontal)
     }
