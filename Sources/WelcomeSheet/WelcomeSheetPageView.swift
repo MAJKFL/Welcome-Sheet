@@ -14,6 +14,7 @@ struct WelcomeSheetPageView: View {
     let restPages: [WelcomeSheetPage]
     
     let screenHeight = UIScreen.main.bounds.height
+    let currentDevice = UIDevice.current.userInterfaceIdiom
     
     var spacing: CGFloat {
         if screenHeight == 812 || screenHeight < 736 { // iPhone mini, Smaller than iPhone plus
@@ -62,7 +63,7 @@ struct WelcomeSheetPageView: View {
                         .fontWeight(.bold)
                         .lineSpacing(8)
                         .multilineTextAlignment(.center)
-                        .padding(.top, topPadding)
+                        .padding(.top, topPadding - (currentDevice == .pad ? 15 : 0))
                         .fixedSize(horizontal: false, vertical: true)
                     
                     VStack(alignment: .midIcons, spacing: 30) {
@@ -93,6 +94,7 @@ struct WelcomeSheetPageView: View {
                     }
                 }
                 .padding(.horizontal)
+                .padding(.horizontal, currentDevice == .pad ? 45 : 0)
             }
             .scrollOnlyOnOverflow()
             
