@@ -9,52 +9,51 @@ import SwiftUI
 
 struct WelcomeSheetPageView: View {
     var page: WelcomeSheetPage
+    var restPages: [WelcomeSheetPage]
     
-    var hasNotch: Bool {
-        return UIApplication.shared.delegate?.window??.safeAreaInsets.top ?? 0 > 20
-    }
+    let screenHeight = UIScreen.main.bounds.height
     
     var body: some View {
-        VStack(spacing: 45) {
-            Text(page.title)
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .lineSpacing(8)
-                .multilineTextAlignment(.center)
-                .padding(25)
-                .fixedSize(horizontal: false, vertical: true)
-            
-            VStack(alignment: .midIcons, spacing: 30) {
-                ForEach(page.rows) { row in
-                    HStack(spacing: 17.5) {
-                        row.image
-                            .renderingMode(.template)
-                            .resizable()
-                            .scaledToFit()
-                            .foregroundColor(row.accentColor ?? Color.accentColor)
-                            .frame(width: 37, height: 37)
-                            .alignmentGuide(.midIcons) { d in d[HorizontalAlignment.center] }
-                        
-                        VStack(alignment: .leading, spacing: 5) {
-                            Text(row.title)
-                                .font(.headline)
-                                .lineSpacing(5)
-                                .fixedSize(horizontal: false, vertical: true)
-                            
-                            Text(row.content)
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                                .lineSpacing(5)
-                                .fixedSize(horizontal: false, vertical: true)
+        VStack(spacing: 0) {
+            ScrollView {
+                VStack(spacing: 60) {
+                    Text(page.title)
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .lineSpacing(8)
+                        .multilineTextAlignment(.center)
+                        .padding(.top, 80)
+                        .fixedSize(horizontal: false, vertical: true)
+                    
+                    VStack(alignment: .midIcons, spacing: 30) {
+                        ForEach(page.rows) { row in
+                            HStack(spacing: 17.5) {
+                                row.image
+                                    .renderingMode(.template)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .foregroundColor(row.accentColor ?? Color.accentColor)
+                                    .frame(width: 37, height: 37)
+                                    .alignmentGuide(.midIcons) { d in d[HorizontalAlignment.center] }
+                                
+                                VStack(alignment: .leading, spacing: 5) {
+                                    Text(row.title)
+                                        .font(.headline)
+                                        .lineSpacing(5)
+                                        .fixedSize(horizontal: false, vertical: true)
+                                    
+                                    Text(row.content)
+                                        .font(.subheadline)
+                                        .foregroundColor(.secondary)
+                                        .lineSpacing(5)
+                                        .fixedSize(horizontal: false, vertical: true)
+                                }
+                            }
+                            .padding(.horizontal, screenHeight == 568 ? 10 : 20)
                         }
                     }
-                    .padding(.horizontal, 20)
                 }
-            }
-            
-            if hasNotch {
-                Spacer()
-                    .layoutPriority(1)
+                .padding(.horizontal)
             }
             
             VStack(spacing: 5) {
@@ -68,30 +67,46 @@ struct WelcomeSheetPageView: View {
                     .padding()
                 }
                 
-                Button {
-                    
-                } label: {
-                    ZStack {
-                        page.accentColor ?? Color.accentColor
-                        
-                        Text("Continue")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .padding()
+                if let nextPage = restPages.first {
+                    NavigationLink {
+                        WelcomeSheetPageView(page: nextPage, restPages: restPages.filter({ $0.id != nextPage.id }))
+                    } label: {
+                        ZStack {
+                            page.accentColor ?? Color.accentColor
+                            
+                            Text("Continue")
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .padding()
+                        }
+                        .fixedSize(horizontal: false, vertical: true)
+                        .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
                     }
-                    .fixedSize(horizontal: false, vertical: true)
-                    .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
+                    .buttonStyle(PlainButtonStyle())
+                    .padding(.horizontal, 10)
+                } else {
+                    Button {
+                        
+                    } label: {
+                        ZStack {
+                            page.accentColor ?? Color.accentColor
+                            
+                            Text("Done")
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .padding()
+                        }
+                        .fixedSize(horizontal: false, vertical: true)
+                        .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    .padding(.horizontal, 10)
                 }
-                .buttonStyle(PlainButtonStyle())
-                .padding(.horizontal, 10)
-                
-                Spacer()
             }
-            
-            Spacer()
-                .layoutPriority(0)
+            .padding(.horizontal, screenHeight == 568 ? 10 : 15)
+            .padding(.bottom, 60)
         }
-        .padding(.horizontal)
+        .ignoresSafeArea(.all, edges: .top)
     }
 }
 
