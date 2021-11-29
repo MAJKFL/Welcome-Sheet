@@ -8,18 +8,16 @@ class ModalUIHostingController<Content>: UIHostingController<Content>, UIPopover
     
     required init?(coder: NSCoder) { fatalError("") }
     
-    
-    
     init(onDismiss: @escaping () -> Void, rootView: Content) {
         self.onDismiss = onDismiss
         super.init(rootView: rootView)
         preferredContentSize = CGSize(width: iPadSheetDimensions.width, height: iPadSheetDimensions.height)
         modalPresentationStyle = .formSheet
         presentationController?.delegate = self
+//        isModalInPresentation = true 
     }
     
     func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
-        print("modal dismiss")
         onDismiss()
     }
 }
@@ -77,10 +75,12 @@ struct FormSheet<Content: View> : UIViewControllerRepresentable {
     @Binding var show: Bool
     
     let content: () -> Content
+    let onDismiss: () -> Void
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<FormSheet<Content>>) -> ModalUIViewController<Content> {
     
         let onDismiss = {
+            self.onDismiss()
             self.show = false
         }
         
@@ -88,8 +88,7 @@ struct FormSheet<Content: View> : UIViewControllerRepresentable {
         return vc
     }
     
-    func updateUIViewController(_ uiViewController: ModalUIViewController<Content>,
-                                context: UIViewControllerRepresentableContext<FormSheet<Content>>) {
+    func updateUIViewController(_ uiViewController: ModalUIViewController<Content>, context: UIViewControllerRepresentableContext<FormSheet<Content>>) {
         if show {
             uiViewController.show()
         }
@@ -100,9 +99,11 @@ struct FormSheet<Content: View> : UIViewControllerRepresentable {
 }
 
 extension View {
-    public func formSheet<Content: View>(isPresented: Binding<Bool>,
-                                         @ViewBuilder content: @escaping () -> Content) -> some View {
-        self.background(FormSheet(show: isPresented,
-                                  content: content))
+    public func formSheet<Content: View>(isPresented: Binding<Bool>, @ViewBuilder content: @escaping () -> Content) -> some View {
+        self.background(FormSheet(show: isPresented, content: content, onDismiss: {}))
+    }
+    
+    public func formSheet<Content: View>(isPresented: Binding<Bool>, @ViewBuilder content: @escaping () -> Content, onDismiss: @escaping () -> Void) -> some View {
+        self.background(FormSheet(show: isPresented, content: content, onDismiss: onDismiss))
     }
 }

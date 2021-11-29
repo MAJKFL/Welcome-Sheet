@@ -1,20 +1,25 @@
 import SwiftUI
-
-public struct WelcomeSheet: ViewModifier {
+ 
+struct WelcomeSheet: ViewModifier {
     @Binding var showSheet: Bool
     var pages: [WelcomeSheetPage]
+    var onDismiss: () -> Void
 
     public func body(content: Content) -> some View {
         content
             .formSheet(isPresented: $showSheet, content: {
                 WelcomeSheetView(pages: pages).environment(\.showingSheet, $showSheet)
-            })
+            }, onDismiss: onDismiss)
     }
 }
 
 public extension View {
     func welcomeSheet(isPresented showSheet: Binding<Bool>, pages: [WelcomeSheetPage]) -> some View {
-        modifier(WelcomeSheet(showSheet: showSheet, pages: pages))
+        modifier(WelcomeSheet(showSheet: showSheet, pages: pages, onDismiss: {}))
+    }
+    
+    func welcomeSheet(isPresented showSheet: Binding<Bool>, pages: [WelcomeSheetPage], onDismiss: @escaping () -> Void) -> some View {
+        modifier(WelcomeSheet(showSheet: showSheet, pages: pages, onDismiss: onDismiss))
     }
 }
 
