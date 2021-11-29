@@ -7,9 +7,9 @@ struct WelcomeSheet: ViewModifier {
 
     public func body(content: Content) -> some View {
         content
-            .formSheet(isPresented: $showSheet, content: {
+            .formSheet(isPresented: $showSheet, onDismiss: onDismiss, content: {
                 WelcomeSheetView(pages: pages).environment(\.showingSheet, $showSheet)
-            }, onDismiss: onDismiss)
+            })
     }
 }
 
@@ -18,7 +18,7 @@ public extension View {
         modifier(WelcomeSheet(showSheet: showSheet, pages: pages, onDismiss: {}))
     }
     
-    func welcomeSheet(isPresented showSheet: Binding<Bool>, pages: [WelcomeSheetPage], onDismiss: @escaping () -> Void) -> some View {
+    func welcomeSheet(isPresented showSheet: Binding<Bool>, onDismiss: @escaping () -> Void, pages: [WelcomeSheetPage]) -> some View {
         modifier(WelcomeSheet(showSheet: showSheet, pages: pages, onDismiss: onDismiss))
     }
 }

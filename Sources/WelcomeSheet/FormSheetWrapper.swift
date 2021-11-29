@@ -74,8 +74,8 @@ struct FormSheet<Content: View> : UIViewControllerRepresentable {
     
     @Binding var show: Bool
     
-    let content: () -> Content
     let onDismiss: () -> Void
+    let content: () -> Content
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<FormSheet<Content>>) -> ModalUIViewController<Content> {
     
@@ -100,10 +100,10 @@ struct FormSheet<Content: View> : UIViewControllerRepresentable {
 
 extension View {
     public func formSheet<Content: View>(isPresented: Binding<Bool>, @ViewBuilder content: @escaping () -> Content) -> some View {
-        self.background(FormSheet(show: isPresented, content: content, onDismiss: {}))
+        self.background(FormSheet(show: isPresented, onDismiss: {}, content: content))
     }
     
-    public func formSheet<Content: View>(isPresented: Binding<Bool>, @ViewBuilder content: @escaping () -> Content, onDismiss: @escaping () -> Void) -> some View {
-        self.background(FormSheet(show: isPresented, content: content, onDismiss: onDismiss))
+    public func formSheet<Content: View>(isPresented: Binding<Bool>, onDismiss: @escaping () -> Void, @ViewBuilder content: @escaping () -> Content) -> some View {
+        self.background(FormSheet(show: isPresented, onDismiss: onDismiss, content: content))
     }
 }
