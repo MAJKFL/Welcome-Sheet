@@ -2,12 +2,13 @@ import SwiftUI
  
 struct WelcomeSheet: ViewModifier {
     @Binding var showSheet: Bool
-    var pages: [WelcomeSheetPage]
-    var onDismiss: () -> Void
+    let pages: [WelcomeSheetPage]
+    let onDismiss: () -> Void
+    let isSlideToDmismissDisabled: Bool
 
-    public func body(content: Content) -> some View {
+    func body(content: Content) -> some View {
         content
-            .formSheet(isPresented: $showSheet, onDismiss: onDismiss, content: {
+            .formSheet(isPresented: $showSheet, onDismiss: onDismiss, isSlideToDmismissDisabled: isSlideToDmismissDisabled, content: {
                 WelcomeSheetView(pages: pages).environment(\.showingSheet, $showSheet)
             })
     }
@@ -15,11 +16,19 @@ struct WelcomeSheet: ViewModifier {
 
 public extension View {
     func welcomeSheet(isPresented showSheet: Binding<Bool>, pages: [WelcomeSheetPage]) -> some View {
-        modifier(WelcomeSheet(showSheet: showSheet, pages: pages, onDismiss: {}))
+        modifier(WelcomeSheet(showSheet: showSheet, pages: pages, onDismiss: {}, isSlideToDmismissDisabled: false))
     }
     
     func welcomeSheet(isPresented showSheet: Binding<Bool>, onDismiss: @escaping () -> Void, pages: [WelcomeSheetPage]) -> some View {
-        modifier(WelcomeSheet(showSheet: showSheet, pages: pages, onDismiss: onDismiss))
+        modifier(WelcomeSheet(showSheet: showSheet, pages: pages, onDismiss: onDismiss, isSlideToDmismissDisabled: false))
+    }
+    
+    func welcomeSheet(isPresented showSheet: Binding<Bool>, isSlideToDmismissDisabled: Bool, pages: [WelcomeSheetPage]) -> some View {
+        modifier(WelcomeSheet(showSheet: showSheet, pages: pages, onDismiss: {}, isSlideToDmismissDisabled: isSlideToDmismissDisabled))
+    }
+    
+    func welcomeSheet(isPresented showSheet: Binding<Bool>, onDismiss: @escaping () -> Void, isSlideToDmismissDisabled: Bool, pages: [WelcomeSheetPage]) -> some View {
+        modifier(WelcomeSheet(showSheet: showSheet, pages: pages, onDismiss: onDismiss, isSlideToDmismissDisabled: isSlideToDmismissDisabled))
     }
 }
 
