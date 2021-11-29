@@ -17,7 +17,7 @@ class ModalUIHostingController<Content>: UIHostingController<Content>, UIPopover
         isModalInPresentation = isSlideToDmismissDisabled
     }
     
-    func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         onDismiss()
     }
 }
@@ -81,12 +81,6 @@ struct FormSheet<Content: View> : UIViewControllerRepresentable {
     let content: () -> Content
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<FormSheet<Content>>) -> ModalUIViewController<Content> {
-    
-        let onDismiss = {
-            self.onDismiss()
-            self.show = false
-        }
-        
         let vc = ModalUIViewController(isPresented: show, onDismiss: onDismiss, isSlideToDmismissDisabled: isSlideToDmismissDisabled, content: content)
         return vc
     }

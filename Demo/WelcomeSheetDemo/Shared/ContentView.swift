@@ -24,6 +24,6 @@ struct ContentView: View {
             showSheet.toggle()
         }
         .padding()
-        .welcomeSheet(isPresented: $showSheet, pages: pages)
+        .welcomeSheet(isPresented: $showSheet, onDismiss: { print("bajbjj oaj") }, isSlideToDmismissDisabled: false, pages: pages)
     }
 }
