@@ -8,38 +8,12 @@ class ModalUIHostingController<Content>: UIHostingController<Content>, UIPopover
     
     required init?(coder: NSCoder) { fatalError("") }
     
-    var width: CGFloat {
-        let width = UIScreen.main.bounds.width
-        
-        if width >= 1024 { // iPad pro 12.9"
-            return width / 1.65
-        } else if width == 744 { // iPad mini (6th gen)
-            return width / 1.2
-        } else if width > 810 { // iPads bigger than standard iPad
-            return width / 1.35
-        } else { // The rest
-            return width / 1.3
-        }
-    }
     
-    var height: CGFloat {
-        let height = UIScreen.main.bounds.height
-        
-        if height >= 1366 { // iPad pro 12.9"
-            return height / 1.65
-        } else if height == 1133 { // iPad mini (6th gen)
-            return height / 1.7
-        } else if height > 1080 { // iPads bigger than standard iPad
-            return height / 1.6
-        } else { // The rest
-            return height / 1.5
-        }
-    }
     
     init(onDismiss: @escaping () -> Void, rootView: Content) {
         self.onDismiss = onDismiss
         super.init(rootView: rootView)
-        preferredContentSize = CGSize(width: width, height: height)
+        preferredContentSize = CGSize(width: iPadSheetDimensions.width, height: iPadSheetDimensions.height)
         modalPresentationStyle = .formSheet
         presentationController?.delegate = self
     }

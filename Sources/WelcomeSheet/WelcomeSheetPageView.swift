@@ -13,36 +13,7 @@ struct WelcomeSheetPageView: View {
     let page: WelcomeSheetPage
     let restPages: [WelcomeSheetPage]
     
-    let screenHeight = UIScreen.main.bounds.height
-    let currentDevice = UIDevice.current.userInterfaceIdiom
-    
-    var spacing: CGFloat {
-        if UIScreen.main.nativeBounds.height == 2340 || screenHeight < 736 { // iPhone mini, Smaller than iPhone plus
-            return 30
-        } else { // The rest
-            return 60
-        }
-    }
-    
-    var topPadding: CGFloat {
-        if screenHeight == 568 { // iPhone SE 1st gen
-            return 50
-        } else if screenHeight <= 736 { // Smaller than iPhone plus
-            return 60
-        } else { // The rest
-            return 80
-        }
-    }
-    
-    var horizontalPaddingAddend: CGFloat {
-        if screenHeight * UIScreen.main.nativeScale >= 896 * 3 || screenHeight == 736 { // iPhone pro max, iPhone plus
-            return 20
-        } else if screenHeight == 568 { // iPhone SE 1st gen
-            return -10
-        } else { // The rest
-            return 0
-        }
-    }
+    let isiPad = UIDevice.current.userInterfaceIdiom == .pad
     
     var body: some View {
         if #available(iOS 14.0, *) {
@@ -57,13 +28,13 @@ struct WelcomeSheetPageView: View {
     var content: some View {
         VStack(spacing: 0) {
             ScrollView {
-                VStack(spacing: spacing) {
+                VStack(spacing: iPhoneDimensions.spacing) {
                     Text(page.title)
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .lineSpacing(8)
                         .multilineTextAlignment(.center)
-                        .padding(.top, topPadding - (currentDevice == .pad ? 15 : 0))
+                        .padding(.top, iPhoneDimensions.topPadding - (isiPad ? 15 : 0))
                         .fixedSize(horizontal: false, vertical: true)
                     
                     VStack(alignment: .midIcons, spacing: 30) {
@@ -89,12 +60,12 @@ struct WelcomeSheetPageView: View {
                                         .fixedSize(horizontal: false, vertical: true)
                                 }
                             }
-                            .padding(.horizontal, 20 + horizontalPaddingAddend)
+                            .padding(.horizontal, 20 + iPhoneDimensions.horizontalPaddingAddend)
                         }
                     }
                 }
                 .padding(.horizontal)
-                .padding(.horizontal, currentDevice == .pad ? 45 : 0)
+                .padding(.horizontal, isiPad ? 45 : 0)
             }
             .scrollOnlyOnOverflow()
             
@@ -121,6 +92,7 @@ struct WelcomeSheetPageView: View {
                                 .foregroundColor(.white)
                                 .padding()
                         }
+                        .frame(width: isiPad ? iPadSheetDimensions.width / 1.7 : nil)
                         .fixedSize(horizontal: false, vertical: true)
                         .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
                     }
@@ -139,6 +111,7 @@ struct WelcomeSheetPageView: View {
                                 .foregroundColor(.white)
                                 .padding()
                         }
+                        .frame(width: isiPad ? iPadSheetDimensions.width / 1.7 : nil)
                         .fixedSize(horizontal: false, vertical: true)
                         .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
                     }
@@ -147,7 +120,7 @@ struct WelcomeSheetPageView: View {
                     .padding(.top)
                 }
             }
-            .padding(.horizontal, 15 + horizontalPaddingAddend)
+            .padding(.horizontal, 15 + iPhoneDimensions.horizontalPaddingAddend)
             .padding(.bottom, 60)
         }
     }
