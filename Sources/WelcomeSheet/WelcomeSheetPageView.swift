@@ -17,7 +17,7 @@ struct WelcomeSheetPageView: View {
     let currentDevice = UIDevice.current.userInterfaceIdiom
     
     var spacing: CGFloat {
-        if screenHeight == 812 || screenHeight < 736 { // iPhone mini, Smaller than iPhone plus
+        if UIScreen.main.nativeBounds.height == 2340 || screenHeight < 736 { // iPhone mini, Smaller than iPhone plus
             return 30
         } else { // The rest
             return 60
@@ -35,7 +35,7 @@ struct WelcomeSheetPageView: View {
     }
     
     var horizontalPaddingAddend: CGFloat {
-        if screenHeight >= 896 || screenHeight == 736 { // iPhone pro max, iPhone plus
+        if screenHeight * UIScreen.main.nativeScale >= 896 * 3 || screenHeight == 736 { // iPhone pro max, iPhone plus
             return 20
         } else if screenHeight == 568 { // iPhone SE 1st gen
             return -10
