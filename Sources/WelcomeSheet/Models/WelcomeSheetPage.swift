@@ -22,6 +22,8 @@ public struct WelcomeSheetPage: Identifiable {
     public var accentColor: Color?
     
     
+    /// Specifies whether to show optional button.
+    public var isShowingOptionalButton = false
     /// Title for optional button
     public var optionalButtonTitle: String?
     /// Action for optional button
@@ -42,6 +44,7 @@ public struct WelcomeSheetPage: Identifiable {
     /// Creates welcome sheet page with given title and rows. Sets optional button with entered title and action.
     public init(title: String, rows: [WelcomeSheetPageRow], optionalButtonTitle: String, optionalButtonAction: @escaping () -> Void) {
         self.init(title: title, rows: rows)
+        self.isShowingOptionalButton = true
         self.optionalButtonTitle = optionalButtonTitle
         self.optionalButtonAction = optionalButtonAction
     }
@@ -50,6 +53,7 @@ public struct WelcomeSheetPage: Identifiable {
     public init(title: String, rows: [WelcomeSheetPageRow], accentColor: Color, optionalButtonTitle: String, optionalButtonAction: @escaping () -> Void) {
         self.init(title: title, rows: rows)
         self.accentColor = accentColor
+        self.isShowingOptionalButton = true
         self.optionalButtonTitle = optionalButtonTitle
         self.optionalButtonAction = optionalButtonAction
     }

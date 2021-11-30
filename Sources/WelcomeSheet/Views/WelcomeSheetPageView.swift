@@ -70,14 +70,16 @@ struct WelcomeSheetPageView: View {
             .scrollOnlyOnOverflow()
             
             VStack(spacing: 5) {
-                if let optionalButtonTitle = page.optionalButtonTitle {
-                    Button(optionalButtonTitle) {
-                        if let optionalButtonAction = page.optionalButtonAction { optionalButtonAction() }
+                if page.isShowingOptionalButton {
+                    if let optionalButtonTitle = page.optionalButtonTitle {
+                        Button(optionalButtonTitle) {
+                            if let optionalButtonAction = page.optionalButtonAction { optionalButtonAction() }
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        .font(Font.headline.weight(.medium))
+                        .foregroundColor(page.accentColor ?? Color.accentColor)
+                        .padding(.top)
                     }
-                    .buttonStyle(PlainButtonStyle())
-                    .font(Font.headline.weight(.medium))
-                    .foregroundColor(page.accentColor ?? Color.accentColor)
-                    .padding(.top)
                 }
                 
                 if let nextPage = restPages.first {
