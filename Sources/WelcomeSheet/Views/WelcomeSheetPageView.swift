@@ -102,7 +102,7 @@ struct WelcomeSheetPageView: View {
                         ZStack {
                             page.accentColor ?? Color.accentColor
                             
-                            Text("Continue")
+                            Text("Continue".localized)
                                 .font(.headline)
                                 .foregroundColor(.white)
                                 .padding()
@@ -121,7 +121,7 @@ struct WelcomeSheetPageView: View {
                         ZStack {
                             page.accentColor ?? Color.accentColor
                             
-                            Text("Done")
+                            Text("Continue".localized)
                                 .font(.headline)
                                 .foregroundColor(.white)
                                 .padding()
@@ -149,4 +149,35 @@ extension HorizontalAlignment {
     }
 
     static let midIcons = HorizontalAlignment(MidIcons.self)
+}
+
+extension String {
+    func localized(_ bundle: Bundle = .main) -> String {
+        bundle.localize(self)
+    }
+    var localized: String {
+        return localized()
+    }
+}
+
+extension Bundle {
+    static var UIKit: Bundle {
+        Self(for: UIApplication.self)
+    }
+    func localize(_ key: String, table: String? = nil) -> String {
+        self.localizedString(forKey: key, value: nil, table: nil)
+    }
+    var localizableStrings: [String: String]? {
+        guard let fileURL = url(forResource: "Localizable", withExtension: "strings") else {
+            return nil
+        }
+        do {
+            let data = try Data(contentsOf: fileURL)
+            let plist = try PropertyListSerialization.propertyList(from: data, format: .none)
+            return plist as? [String: String]
+        } catch {
+            print(error)
+        }
+        return nil
+    }
 }
