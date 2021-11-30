@@ -22,6 +22,10 @@ class ModalUIHostingController<Content>: UIHostingController<Content>, UIPopover
         isDismissedBySliding = true
     }
     
+    func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
+        isDismissedBySliding = false
+    }
+    
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         onDismiss()
     }
