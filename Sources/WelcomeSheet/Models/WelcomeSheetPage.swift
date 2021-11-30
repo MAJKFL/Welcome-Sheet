@@ -7,27 +7,28 @@
 
 import SwiftUI
 
-/// A type that describes a welcome sheet page's content.
+/// A type that describes welcome sheet page's content.
 public struct WelcomeSheetPage: Identifiable {
     public var id = UUID()
     
     
-    /// Large title displayed on top.
+    /// Large title displayed on the top.
     public var title: String
-    /// Rows of content inside body.
+    /// Rows of content inside a body.
     public var rows: [WelcomeSheetPageRow]
     
     
-    /// Color used for buttons.
+    /// Color used for buttons. When set to nil, uses default accent color.
     public var accentColor: Color?
     
     
-    /// Specifies whether to show optional button.
+    /// Specifies whether to show an optional button.
     public var isShowingOptionalButton = false
-    /// Title for optional button
+    /// Title for an optional button
     public var optionalButtonTitle: String?
-    /// Action for optional button
+    /// Action for an optional button
     public var optionalButtonAction: (() -> Void)?
+    
     
     /// Creates welcome sheet page with given title and rows.
     public init(title: String, rows: [WelcomeSheetPageRow]) {
