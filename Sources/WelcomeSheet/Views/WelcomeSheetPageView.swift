@@ -29,14 +29,24 @@ struct WelcomeSheetPageView: View {
         VStack(spacing: 0) {
             ScrollView {
                 VStack(spacing: iPhoneDimensions.spacing) {
-                    Text(page.title)
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .lineSpacing(8)
-                        .multilineTextAlignment(.center)
-                        .padding(.top, iPhoneDimensions.topPadding - (isiPad ? 15 : 0))
-                        .fixedSize(horizontal: false, vertical: true)
-                        .accessibilityHeading(.h1)
+                    if #available(iOS 15.0, *) {
+                        Text(page.title)
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                            .lineSpacing(8)
+                            .multilineTextAlignment(.center)
+                            .padding(.top, iPhoneDimensions.topPadding - (isiPad ? 15 : 0))
+                            .fixedSize(horizontal: false, vertical: true)
+                            .accessibilityHeading(.h1)
+                    } else {
+                        Text(page.title)
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                            .lineSpacing(8)
+                            .multilineTextAlignment(.center)
+                            .padding(.top, iPhoneDimensions.topPadding - (isiPad ? 15 : 0))
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
                     
                     VStack(alignment: .midIcons, spacing: 30) {
                         ForEach(page.rows) { row in
@@ -48,7 +58,7 @@ struct WelcomeSheetPageView: View {
                                     .foregroundColor(row.accentColor ?? Color.accentColor)
                                     .frame(width: 37, height: 37)
                                     .alignmentGuide(.midIcons) { d in d[HorizontalAlignment.center] }
-                                    .accessibilityHidden(true)
+                                    .accessibility(hidden: true)
                                 
                                 VStack(alignment: .leading, spacing: 2) {
                                     Text(row.title)
