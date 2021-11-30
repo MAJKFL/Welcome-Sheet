@@ -16,7 +16,10 @@ struct ContentView: View {
             WelcomeSheetPageRow(imageSystemName: "platter.2.filled.iphone", title: "Conversation Views", content: "Choose a side-by-side or face-to-face conversation view."),
             WelcomeSheetPageRow(imageSystemName: "mic.badge.plus", title: "Auto Translate", content: "Respond in conversations without tapping the microphone button."),
             WelcomeSheetPageRow(imageSystemName: "iphone", title: "System-Wide Translation", content: "Translate selected text anywhere on your iPhone.")
-        ], optionalButtonTitle: "About Translation & Privacy...", optionalButtonAction: { print("About Translation & Privacy...") })
+        ], optionalButtonTitle: "About Translation & Privacy...", optionalButtonAction: { print("About Translation & Privacy...") }),
+        WelcomeSheetPage(title: "bajo jajo to moje jajo i moje ciało", rows: [
+            WelcomeSheetPageRow(imageSystemName: "swift", title: "Swift", content: "To fajny język")
+        ], optionalButtonTitle: "twoja stara", optionalButtonAction: {})
     ]
     
     var body: some View {

@@ -29,23 +29,29 @@ struct WelcomeSheetPageView: View {
         VStack(spacing: 0) {
             ScrollView {
                 VStack(spacing: iPhoneDimensions.spacing) {
-                    if #available(iOS 15.0, *) {
-                        Text(page.title)
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
-                            .lineSpacing(8)
-                            .multilineTextAlignment(.center)
-                            .padding(.top, iPhoneDimensions.topPadding - (isiPad ? 15 : 0))
-                            .fixedSize(horizontal: false, vertical: true)
-                            .accessibilityHeading(.h1)
-                    } else {
-                        Text(page.title)
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
-                            .lineSpacing(8)
-                            .multilineTextAlignment(.center)
-                            .padding(.top, iPhoneDimensions.topPadding - (isiPad ? 15 : 0))
-                            .fixedSize(horizontal: false, vertical: true)
+                    HStack {
+                        Spacer()
+                        
+                        if #available(iOS 15.0, *) {
+                            Text(page.title)
+                                .font(.largeTitle)
+                                .fontWeight(.bold)
+                                .lineSpacing(8)
+                                .multilineTextAlignment(.center)
+                                .padding(.top, iPhoneDimensions.topPadding - (isiPad ? 15 : 0))
+                                .fixedSize(horizontal: false, vertical: true)
+                                .accessibilityHeading(.h1)
+                        } else {
+                            Text(page.title)
+                                .font(.largeTitle)
+                                .fontWeight(.bold)
+                                .lineSpacing(8)
+                                .multilineTextAlignment(.center)
+                                .padding(.top, iPhoneDimensions.topPadding - (isiPad ? 15 : 0))
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
+                        
+                        Spacer()
                     }
                     
                     VStack(alignment: .midIcons, spacing: 30) {
