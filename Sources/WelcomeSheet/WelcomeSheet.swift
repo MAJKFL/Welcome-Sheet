@@ -33,23 +33,8 @@ extension EnvironmentValues {
 }
 
 public extension View {
-    /// Presents a sheet when a binding to a Boolean value that you provide is true.
-    func welcomeSheet(isPresented showSheet: Binding<Bool>, pages: [WelcomeSheetPage]) -> some View {
-        modifier(WelcomeSheet(showSheet: showSheet, pages: pages, onDismiss: {}, isSlideToDmismissDisabled: false))
-    }
-    
-    /// Presents a sheet when a binding to a Boolean value that you provide is true.
-    func welcomeSheet(isPresented showSheet: Binding<Bool>, onDismiss: @escaping () -> Void, pages: [WelcomeSheetPage]) -> some View {
-        modifier(WelcomeSheet(showSheet: showSheet, pages: pages, onDismiss: onDismiss, isSlideToDmismissDisabled: false))
-    }
-    
-    /// Presents a sheet when a binding to a Boolean value that you provide is true.
-    func welcomeSheet(isPresented showSheet: Binding<Bool>, isSlideToDmismissDisabled: Bool, pages: [WelcomeSheetPage]) -> some View {
-        modifier(WelcomeSheet(showSheet: showSheet, pages: pages, onDismiss: {}, isSlideToDmismissDisabled: isSlideToDmismissDisabled))
-    }
-    
-    /// Presents a sheet when a binding to a Boolean value that you provide is true.
-    func welcomeSheet(isPresented showSheet: Binding<Bool>, onDismiss: @escaping () -> Void, isSlideToDmismissDisabled: Bool, pages: [WelcomeSheetPage]) -> some View {
+    /// Presents welcome sheet with given pages when a binding to a Boolean value that you provide is true.
+    func welcomeSheet(isPresented showSheet: Binding<Bool>, onDismiss: @escaping () -> Void = {}, isSlideToDmismissDisabled: Bool = false, pages: [WelcomeSheetPage]) -> some View {
         modifier(WelcomeSheet(showSheet: showSheet, pages: pages, onDismiss: onDismiss, isSlideToDmismissDisabled: isSlideToDmismissDisabled))
     }
 }
