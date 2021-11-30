@@ -18,15 +18,8 @@ class ModalUIHostingController<Content>: UIHostingController<Content>, UIPopover
         isModalInPresentation = isSlideToDmismissDisabled
     }
     
-    func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
-        isDismissedBySliding = true
-    }
-    
-    func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
-        isDismissedBySliding = false
-    }
-    
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        isDismissedBySliding = true
         onDismiss()
     }
 }
