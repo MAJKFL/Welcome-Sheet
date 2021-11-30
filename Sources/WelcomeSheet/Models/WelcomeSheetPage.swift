@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  WelcomeSheetPage.swift
 //  
 //
 //  Created by Jakub Florek on 27/11/2021.

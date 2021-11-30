@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  iPadSheetDimensions.swift
 //  
 //
 //  Created by Jakub Florek on 29/11/2021.

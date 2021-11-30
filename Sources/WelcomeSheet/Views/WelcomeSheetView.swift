@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  WelcomeSheetView.swift
 //  
 //
 //  Created by Jakub Florek on 27/11/2021.

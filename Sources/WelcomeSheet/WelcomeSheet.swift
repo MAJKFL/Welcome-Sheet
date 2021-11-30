@@ -1,3 +1,10 @@
+//
+//  WelcomeSheet.swift
+//
+//
+//  Created by Jakub Florek on 27/11/2021.
+//
+
 import SwiftUI
  
 struct WelcomeSheet: ViewModifier {
