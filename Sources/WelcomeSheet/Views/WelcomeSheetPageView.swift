@@ -36,6 +36,7 @@ struct WelcomeSheetPageView: View {
                         .multilineTextAlignment(.center)
                         .padding(.top, iPhoneDimensions.topPadding - (isiPad ? 15 : 0))
                         .fixedSize(horizontal: false, vertical: true)
+                        .accessibilityHeading(.h1)
                     
                     VStack(alignment: .midIcons, spacing: 30) {
                         ForEach(page.rows) { row in
@@ -47,6 +48,7 @@ struct WelcomeSheetPageView: View {
                                     .foregroundColor(row.accentColor ?? Color.accentColor)
                                     .frame(width: 37, height: 37)
                                     .alignmentGuide(.midIcons) { d in d[HorizontalAlignment.center] }
+                                    .accessibilityHidden(true)
                                 
                                 VStack(alignment: .leading, spacing: 2) {
                                     Text(row.title)
@@ -61,6 +63,7 @@ struct WelcomeSheetPageView: View {
                                 }
                             }
                             .padding(.horizontal, 20 + iPhoneDimensions.horizontalPaddingAddend)
+                            .accessibilityElement(children: .combine)
                         }
                     }
                 }
