@@ -77,6 +77,8 @@ struct WelcomeSheetPageView: View {
                                         .foregroundColor(.secondary)
                                         .fixedSize(horizontal: false, vertical: true)
                                 }
+                                
+                                Spacer()
                             }
                             .padding(.horizontal, 20 + iPhoneDimensions.horizontalPaddingAddend)
                             .accessibilityElement(children: .combine)
