@@ -18,6 +18,8 @@ public struct WelcomeSheetPage: Identifiable {
     public var rows: [WelcomeSheetPageRow]
     
     
+    /// Title for a main button. Set to "Continue" by default.
+    public var mainButtonTitle: String
     /// Color used for buttons. When set to nil, uses default accent color.
     public var accentColor: Color?
     
@@ -30,29 +32,30 @@ public struct WelcomeSheetPage: Identifiable {
     public var optionalButtonAction: (() -> Void)?
     
     
-    /// Creates welcome sheet page with given title and rows.
-    public init(title: String, rows: [WelcomeSheetPageRow]) {
+    /// Creates welcome sheet page with given title, rows and optional main button title.
+    public init(title: String, rows: [WelcomeSheetPageRow], mainButtonTitle: String? = nil) {
         self.title = title
         self.rows = rows
+        self.mainButtonTitle = mainButtonTitle ?? "Continue"
     }
     
-    /// Creates welcome sheet page with given title and rows. Tints buttons with specified color.
-    public init(title: String, rows: [WelcomeSheetPageRow], accentColor: Color) {
-        self.init(title: title, rows: rows)
+    /// Creates welcome sheet page with given title, rows and optional main button title. Tints buttons with specified color.
+    public init(title: String, rows: [WelcomeSheetPageRow], mainButtonTitle: String? = nil, accentColor: Color) {
+        self.init(title: title, rows: rows, mainButtonTitle: mainButtonTitle)
         self.accentColor = accentColor
     }
     
-    /// Creates welcome sheet page with given title and rows. Sets optional button with entered title and action.
-    public init(title: String, rows: [WelcomeSheetPageRow], optionalButtonTitle: String, optionalButtonAction: @escaping () -> Void) {
-        self.init(title: title, rows: rows)
+    /// Creates welcome sheet page with given title, rows and optional main button title. Sets optional button with entered title and action.
+    public init(title: String, rows: [WelcomeSheetPageRow], mainButtonTitle: String? = nil, optionalButtonTitle: String, optionalButtonAction: @escaping () -> Void) {
+        self.init(title: title, rows: rows, mainButtonTitle: mainButtonTitle)
         self.isShowingOptionalButton = true
         self.optionalButtonTitle = optionalButtonTitle
         self.optionalButtonAction = optionalButtonAction
     }
     
-    /// Creates welcome sheet page with given title and rows. Tints buttons with specified color. Sets optional button with entered title and action.
-    public init(title: String, rows: [WelcomeSheetPageRow], accentColor: Color, optionalButtonTitle: String, optionalButtonAction: @escaping () -> Void) {
-        self.init(title: title, rows: rows)
+    /// Creates welcome sheet page with given title, rows and optional main button title. Tints buttons with specified color. Sets optional button with entered title and action.
+    public init(title: String, rows: [WelcomeSheetPageRow], mainButtonTitle: String? = nil, accentColor: Color, optionalButtonTitle: String, optionalButtonAction: @escaping () -> Void) {
+        self.init(title: title, rows: rows, mainButtonTitle: mainButtonTitle)
         self.accentColor = accentColor
         self.isShowingOptionalButton = true
         self.optionalButtonTitle = optionalButtonTitle

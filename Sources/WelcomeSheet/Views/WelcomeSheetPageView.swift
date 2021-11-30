@@ -102,7 +102,7 @@ struct WelcomeSheetPageView: View {
                         ZStack {
                             page.accentColor ?? Color.accentColor
                             
-                            Text("Continue")
+                            Text(page.mainButtonTitle)
                                 .font(.headline)
                                 .foregroundColor(.white)
                                 .padding()
@@ -121,7 +121,7 @@ struct WelcomeSheetPageView: View {
                         ZStack {
                             page.accentColor ?? Color.accentColor
                             
-                            Text("Continue")
+                            Text(page.mainButtonTitle)
                                 .font(.headline)
                                 .foregroundColor(.white)
                                 .padding()
