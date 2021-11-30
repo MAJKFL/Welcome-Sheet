@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// A type that describes a WelcomeSheetPageRow's content.
 public struct WelcomeSheetPageRow: Identifiable {
     public var id = UUID()
     public var title: String
