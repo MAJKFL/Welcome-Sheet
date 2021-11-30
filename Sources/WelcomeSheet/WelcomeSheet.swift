@@ -14,6 +14,17 @@ struct WelcomeSheet: ViewModifier {
     }
 }
 
+struct ShowingSheetKey: EnvironmentKey {
+    static let defaultValue: Binding<Bool>? = nil
+}
+
+extension EnvironmentValues {
+    var showingSheet: Binding<Bool>? {
+        get { self[ShowingSheetKey.self] }
+        set { self[ShowingSheetKey.self] = newValue }
+    }
+}
+
 public extension View {
     func welcomeSheet(isPresented showSheet: Binding<Bool>, pages: [WelcomeSheetPage]) -> some View {
         modifier(WelcomeSheet(showSheet: showSheet, pages: pages, onDismiss: {}, isSlideToDmismissDisabled: false))
@@ -29,16 +40,5 @@ public extension View {
     
     func welcomeSheet(isPresented showSheet: Binding<Bool>, onDismiss: @escaping () -> Void, isSlideToDmismissDisabled: Bool, pages: [WelcomeSheetPage]) -> some View {
         modifier(WelcomeSheet(showSheet: showSheet, pages: pages, onDismiss: onDismiss, isSlideToDmismissDisabled: isSlideToDmismissDisabled))
-    }
-}
-
-struct ShowingSheetKey: EnvironmentKey {
-    static let defaultValue: Binding<Bool>? = nil
-}
-
-extension EnvironmentValues {
-    var showingSheet: Binding<Bool>? {
-        get { self[ShowingSheetKey.self] }
-        set { self[ShowingSheetKey.self] = newValue }
     }
 }

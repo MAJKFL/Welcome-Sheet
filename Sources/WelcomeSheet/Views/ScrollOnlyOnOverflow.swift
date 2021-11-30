@@ -62,8 +62,7 @@ private struct ContentSizeKey: PreferenceKey {
 }
 
 extension ScrollView {
-    
-    public func scrollOnlyOnOverflow() -> some View {
+    func scrollOnlyOnOverflow() -> some View {
         OverflowScrollView(scrollView: self)
     }
 }
