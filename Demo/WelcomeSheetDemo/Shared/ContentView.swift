@@ -9,9 +9,28 @@ import SwiftUI
 import WelcomeSheet
 
 struct ContentView: View {
-    @State private var showSheet = true
+    @Environment(\.openURL) var openURL
     
-    let pages = [
+    @State private var showSheet = false
+    
+    var pages: [WelcomeSheetPage] {
+        [
+        WelcomeSheetPage(title: "Welcome to Welcome Sheet", rows: [
+            WelcomeSheetPageRow(imageSystemName: "note.text.badge.plus",
+                                accentColor: Color.green,
+                                title: "Quick Creation",
+                                content: "Sheet creation is incredibly intuitive. Simply create an array of sheet pages filled with your content."),
+            
+            WelcomeSheetPageRow(imageSystemName: "rectangle.grid.2x2.fill",
+                                accentColor: Color(red: 0.00, green: 0.70, blue: 1.00),
+                                title: "Highly Customizable", content: "Set accent colors, add optional buttons, disable dismiss gestures, perform actions after button taps or sheet dismissal and more!"),
+            
+            WelcomeSheetPageRow(imageSystemName: "lightbulb.fill",
+                                accentColor: Color.orange,
+                                title: "Works out of the box",
+                                content: "Don't worry about different screen sizes. Your Welcome Sheet will look gorgeous on every iOS device!")
+        ], accentColor: Color.purple, optionalButtonTitle: "About Welcome Sheet...", optionalButtonAction: { openURL(URL(string: "https://github.com/MAJKFL/Welcome-Sheet")!) }),
+        
         WelcomeSheetPage(title: "What's New in Translate", rows: [
             WelcomeSheetPageRow(imageSystemName: "platter.2.filled.iphone",
                                 title: "Conversation Views",
@@ -58,11 +77,12 @@ struct ContentView: View {
                                 title: "Improved Search",
                                 content: "Finding places is now easier with filters and automatic updates when you're browsing results on the map.")
         ], accentColor: Color.blue, optionalButtonTitle: "About Apple Maps & Privacy...", optionalButtonAction: { print("Tapped 'About Apple Maps & Privacy...'") })
-    ]
+        ]
+    }
     
     var body: some View {
         Button("Show sheet") {
-            showSheet.toggle()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { showSheet.toggle() }
         }
         .padding()
         .welcomeSheet(isPresented: $showSheet, onDismiss: { print("Sheet dismissed") }, isSlideToDmismissDisabled: true, pages: pages)
