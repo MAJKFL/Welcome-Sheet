@@ -25,6 +25,8 @@ class ModalUIHostingController<Content>: UIHostingController<Content>, UIPopover
 }
 
 class ModalUIViewController<Content: View>: UIViewController {
+    var shouldUpdate: Bool
+    
     let isPresented: Bool
     let isSlideToDmismissDisabled: Bool
     let content: () -> Content
@@ -37,6 +39,7 @@ class ModalUIViewController<Content: View>: UIViewController {
     
     init(isPresented: Bool = false, onDismiss: @escaping () -> Void, isSlideToDmismissDisabled: Bool, content: @escaping () -> Content) {
         self.isSlideToDmismissDisabled = isSlideToDmismissDisabled
+        self.shouldUpdate = isPresented
         self.isPresented = isPresented
         self.onDismiss = onDismiss
         self.content = content
@@ -47,6 +50,7 @@ class ModalUIViewController<Content: View>: UIViewController {
     func show() {
         guard isViewDidAppear else { return }
         self.hostVC = ModalUIHostingController(onDismiss: onDismiss, isSlideToDmismissDisabled: isSlideToDmismissDisabled, rootView: content())
+        shouldUpdate = true
         present(hostVC, animated: true)
     }
     
@@ -97,7 +101,7 @@ struct FormSheet<Content: View> : UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: ModalUIViewController<Content>, context: UIViewControllerRepresentableContext<FormSheet<Content>>) {
         if show {
             uiViewController.show()
-        } else if !uiViewController.hostVC.isDismissedBySliding {
+        } else if !uiViewController.hostVC.isDismissedBySliding && uiViewController.shouldUpdate {
             uiViewController.hide()
         }
     }
