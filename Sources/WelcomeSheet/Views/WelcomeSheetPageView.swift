@@ -94,7 +94,9 @@ struct WelcomeSheetPageView: View {
                 if page.isShowingOptionalButton {
                     if let optionalButtonTitle = page.optionalButtonTitle {
                         Button(optionalButtonTitle) {
-                            if let optionalButtonAction = page.optionalButtonAction { optionalButtonAction() }
+                            if let url = page.optionalButtonURL {
+                                UIApplication.shared.open(url)
+                            }
                         }
                         .buttonStyle(PlainButtonStyle())
                         .font(Font.headline.weight(.medium))
