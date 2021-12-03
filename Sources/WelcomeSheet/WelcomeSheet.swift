@@ -11,11 +11,11 @@ struct WelcomeSheet: ViewModifier {
     @Binding var showSheet: Bool
     let pages: [WelcomeSheetPage]
     let onDismiss: () -> Void
-    let isSlideToDmismissDisabled: Bool
+    let isSlideToDismissDisabled: Bool
 
     func body(content: Content) -> some View {
         content
-            .formSheet(isPresented: $showSheet, onDismiss: onDismiss, isSlideToDmismissDisabled: isSlideToDmismissDisabled, content: {
+            .formSheet(isPresented: $showSheet, onDismiss: onDismiss, isSlideToDismissDisabled: isSlideToDismissDisabled, content: {
                 WelcomeSheetView(pages: pages).environment(\.showingSheet, $showSheet)
             })
     }
@@ -34,7 +34,7 @@ extension EnvironmentValues {
 
 public extension View {
     /// Presents welcome sheet with given pages when a binding to a Boolean value that you provide is true.
-    func welcomeSheet(isPresented showSheet: Binding<Bool>, onDismiss: @escaping () -> Void = {}, isSlideToDmismissDisabled: Bool = false, pages: [WelcomeSheetPage]) -> some View {
-        modifier(WelcomeSheet(showSheet: showSheet, pages: pages, onDismiss: onDismiss, isSlideToDmismissDisabled: isSlideToDmismissDisabled))
+    func welcomeSheet(isPresented showSheet: Binding<Bool>, onDismiss: @escaping () -> Void = {}, isSlideToDismissDisabled: Bool = false, pages: [WelcomeSheetPage]) -> some View {
+        modifier(WelcomeSheet(showSheet: showSheet, pages: pages, onDismiss: onDismiss, isSlideToDismissDisabled: isSlideToDismissDisabled))
     }
 }
