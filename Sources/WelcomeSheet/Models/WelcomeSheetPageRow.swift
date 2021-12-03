@@ -20,7 +20,7 @@ public struct WelcomeSheetPageRow: Identifiable {
     public var image: Image
     
     
-    /// Color used for an image. When set to nil, uses default accent color.
+    /// Color used for an image. When set to nil, uses default accent colour.
     public var accentColor: Color?
     
     
@@ -36,13 +36,13 @@ public struct WelcomeSheetPageRow: Identifiable {
         self.init(image: Image(systemName: imageSystemName), title: title, content: content)
     }
 
-    /// Creates welcome sheet page row with given image, title and content. Tints image with specified color.
+    /// Creates welcome sheet page row with given image, title and content. Tints image with specified colour.
     public init(image: Image, accentColor: Color, title: String, content: String) {
         self.init(image: image, title: title, content: content)
         self.accentColor = accentColor
     }
 
-    /// Creates welcome sheet page row with system image, given title and content. Tints image with specified color.
+    /// Creates welcome sheet page row with system image, given title and content. Tints image with specified colour.
     public init(imageSystemName: String, accentColor: Color, title: String, content: String) {
         self.init(image: Image(systemName: imageSystemName), title: title, content: content)
         self.accentColor = accentColor

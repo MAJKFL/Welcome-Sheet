@@ -20,7 +20,7 @@ public struct WelcomeSheetPage: Identifiable {
     
     /// Title for a main button. Set to "Continue" by default.
     public var mainButtonTitle: String
-    /// Color used for buttons. When set to nil, uses default accent color.
+    /// Color used for buttons. When set to nil, uses default accent colour.
     public var accentColor: Color?
     
     
@@ -39,7 +39,7 @@ public struct WelcomeSheetPage: Identifiable {
         self.mainButtonTitle = mainButtonTitle ?? "Continue"
     }
     
-    /// Creates welcome sheet page with given title, rows and main button title. Tints buttons with specified color.
+    /// Creates welcome sheet page with given title, rows and main button title. Tints buttons with specified colour.
     public init(title: String, rows: [WelcomeSheetPageRow], mainButtonTitle: String? = nil, accentColor: Color) {
         self.init(title: title, rows: rows, mainButtonTitle: mainButtonTitle)
         self.accentColor = accentColor
@@ -53,7 +53,7 @@ public struct WelcomeSheetPage: Identifiable {
         self.optionalButtonURL = optionalButtonURL
     }
     
-    /// Creates welcome sheet page with given title, rows and main button title. Tints buttons with specified color. Sets optional button with entered title and URL to open.
+    /// Creates welcome sheet page with given title, rows and main button title. Tints buttons with specified colour. Sets optional button with entered title and URL to open.
     public init(title: String, rows: [WelcomeSheetPageRow], mainButtonTitle: String? = nil, accentColor: Color, optionalButtonTitle: String, optionalButtonURL: URL?) {
         self.init(title: title, rows: rows, mainButtonTitle: mainButtonTitle)
         self.accentColor = accentColor

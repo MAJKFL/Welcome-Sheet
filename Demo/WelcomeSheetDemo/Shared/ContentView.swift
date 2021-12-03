@@ -20,7 +20,7 @@ struct ContentView: View {
             
             WelcomeSheetPageRow(imageSystemName: "slider.horizontal.3",
                                 accentColor: Color.indigo,
-                                title: "Highly Customizable", content: "Match sheet's appearance to your app, link buttons, perform actions after dismissal."),
+                                title: "Highly Customisable", content: "Match sheet's appearance to your app, link buttons, perform actions after dismissal."),
             
             WelcomeSheetPageRow(imageSystemName: "ipad.and.iphone",
                                 accentColor: Color.green,
@@ -40,7 +40,7 @@ struct ContentView: View {
             WelcomeSheetPageRow(imageSystemName: "iphone",
                                 title: "System-Wide Translation",
                                 content: "Translate selected text anywhere on your iPhone.")
-        ], optionalButtonTitle: "About Translation & Privacy...", optionalButtonURL: URL(string: "https://apple.com")),
+        ], mainButtonTitle: "Wassup?"),
         
         WelcomeSheetPage(title: "Welcome to Reminders", rows: [
             WelcomeSheetPageRow(imageSystemName: "note.text.badge.plus",
@@ -73,7 +73,7 @@ struct ContentView: View {
                                 accentColor: Color.blue,
                                 title: "Improved Search",
                                 content: "Finding places is now easier with filters and automatic updates when you're browsing results on the map.")
-        ], accentColor: Color.blue, optionalButtonTitle: "About Apple Maps & Privacy...", optionalButtonURL: URL(string: "https://apple.com"))
+        ], mainButtonTitle: "Let's go!", accentColor: Color.pink, optionalButtonTitle: "About Apple Maps & Privacy...", optionalButtonURL: URL(string: "https://apple.com"))
     ]
     
     var body: some View {
@@ -81,7 +81,7 @@ struct ContentView: View {
             showSheet.toggle()
         }
         .padding()
-        .welcomeSheet(isPresented: $showSheet, onDismiss: { sheetDismissed() }, isSlideToDismissDisabled: false, pages: pages)
+        .welcomeSheet(isPresented: $showSheet, onDismiss: { sheetDismissed() }, isSlideToDismissDisabled: true, pages: pages)
     }
     
     func sheetDismissed() {
