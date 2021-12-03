@@ -56,6 +56,8 @@ class ModalUIViewController<Content: View>: UIViewController {
     
     func hide() {
         guard !hostVC.isBeingDismissed else { return }
+        
+        shouldUpdate = false
 
         dismiss(animated: true) {
             self.hostVC.presentationControllerDidDismiss(self.presentationController!)
