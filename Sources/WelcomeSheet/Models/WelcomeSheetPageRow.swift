@@ -8,7 +8,14 @@
 import SwiftUI
 
 /// A type that describes welcome sheet page row's content.
-public struct WelcomeSheetPageRow: Identifiable {
+public struct WelcomeSheetPageRow: Identifiable, Decodable {
+    private enum CodingKeys : String, CodingKey {
+        case title
+        case content
+        case imageName
+        case accentColor
+    }
+    
     public var id = UUID()
     
     
@@ -46,5 +53,26 @@ public struct WelcomeSheetPageRow: Identifiable {
     public init(imageSystemName: String, accentColor: Color, title: String, content: String) {
         self.init(image: Image(systemName: imageSystemName), title: title, content: content)
         self.accentColor = accentColor
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        title = try container.decode(String.self, forKey: .title)
+        content = try container.decode(String.self, forKey: .content)
+        
+        let imageName = try container.decode(String.self, forKey: .imageName)
+        
+        if let uiImage = UIImage(named: imageName) {
+            image = Image(uiImage: uiImage)
+        } else {
+            image = Image(systemName: imageName)
+        }
+        
+        do {
+            let colorHex = try container.decode(String.self, forKey: .accentColor)
+            accentColor = Color(hex: colorHex)
+        } catch {
+            accentColor = nil
+        }
     }
 }

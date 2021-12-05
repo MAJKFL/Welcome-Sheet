@@ -8,7 +8,17 @@
 import SwiftUI
 
 /// A type that describes welcome sheet page's content.
-public struct WelcomeSheetPage: Identifiable {
+public struct WelcomeSheetPage: Identifiable, Decodable {
+    private enum CodingKeys : String, CodingKey {
+        case title
+        case rows
+        case mainButtonTitle
+        case accentColor
+        case isShowingOptionalButton
+        case optionalButtonTitle
+        case optionalButtonURL
+    }
+    
     public var id = UUID()
     
     
@@ -60,5 +70,47 @@ public struct WelcomeSheetPage: Identifiable {
         self.isShowingOptionalButton = true
         self.optionalButtonTitle = optionalButtonTitle
         self.optionalButtonURL = optionalButtonURL
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        title = try container.decode(String.self, forKey: .title)
+        rows = try container.decode([WelcomeSheetPageRow].self, forKey: .rows)
+        
+        do {
+            mainButtonTitle = try container.decode(String.self, forKey: .mainButtonTitle)
+        } catch {
+            mainButtonTitle = "Continue"
+        }
+        
+        do {
+            let colorHex = try container.decode(String.self, forKey: .accentColor)
+            accentColor = Color(hex: colorHex)
+        } catch {
+            accentColor = nil
+        }
+        
+        do {
+            optionalButtonTitle = try container.decode(String.self, forKey: .optionalButtonTitle)
+        } catch {
+            optionalButtonTitle = nil
+        }
+        
+        do {
+            let urlString = try container.decode(String.self, forKey: .optionalButtonURL)
+            optionalButtonURL = URL(string: urlString)
+        } catch {
+            optionalButtonURL = nil
+        }
+        
+        do {
+            isShowingOptionalButton = try container.decode(Bool.self, forKey: .isShowingOptionalButton)
+        } catch {
+            if optionalButtonTitle != nil {
+                isShowingOptionalButton = true
+            } else {
+                isShowingOptionalButton = false
+            }
+        }
     }
 }
