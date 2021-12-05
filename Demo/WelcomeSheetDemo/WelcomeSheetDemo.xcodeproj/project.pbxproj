@@ -14,6 +14,8 @@
 		3A1EC39B2752B0E70005F216 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A1EC3892752B0E70005F216 /* Assets.xcassets */; };
 		3A1EC39C2752B0E70005F216 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A1EC3892752B0E70005F216 /* Assets.xcassets */; };
 		3A1EC3A72752B17C0005F216 /* WelcomeSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 3A1EC3A62752B17C0005F216 /* WelcomeSheet */; };
+		3A75F403275D1E30009E94E6 /* demo.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A75F402275D1E30009E94E6 /* demo.json */; };
+		3A75F404275D1E30009E94E6 /* demo.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A75F402275D1E30009E94E6 /* demo.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +25,7 @@
 		3A1EC38E2752B0E70005F216 /* WelcomeSheetDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WelcomeSheetDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A1EC3942752B0E70005F216 /* WelcomeSheetDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WelcomeSheetDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A1EC3962752B0E70005F216 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		3A75F402275D1E30009E94E6 /* demo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = demo.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +59,7 @@
 		3A1EC3862752B0E70005F216 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				3A75F402275D1E30009E94E6 /* demo.json */,
 				3A1EC3872752B0E70005F216 /* WelcomeSheetDemoApp.swift */,
 				3A1EC3882752B0E70005F216 /* ContentView.swift */,
 				3A1EC3892752B0E70005F216 /* Assets.xcassets */,
@@ -165,6 +169,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A75F403275D1E30009E94E6 /* demo.json in Resources */,
 				3A1EC39B2752B0E70005F216 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -173,6 +178,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A75F404275D1E30009E94E6 /* demo.json in Resources */,
 				3A1EC39C2752B0E70005F216 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -18,7 +18,7 @@ struct ContentView: View {
                                 title: "Quick Creation",
                                 content: "It's incredibly intuitive. Simply declare an array of pages filled with content."),
             
-            WelcomeSheetPageRow(imageSystemName: "slider.horizontal.3",
+            WelcomeSheetPageRow(image: Image("gears"),
                                 accentColor: Color.indigo,
                                 title: "Highly Customisable", content: "Match sheet's appearance to your app, link buttons, perform actions after dismissal."),
             
@@ -73,7 +73,7 @@ struct ContentView: View {
                                 accentColor: Color.blue,
                                 title: "Improved Search",
                                 content: "Finding places is now easier with filters and automatic updates when you're browsing results on the map.")
-        ], mainButtonTitle: "Let's go!", accentColor: Color.pink, optionalButtonTitle: "About Apple Maps & Privacy...", optionalButtonURL: URL(string: "https://apple.com"))
+        ], accentColor: Color.pink, mainButtonTitle: "Let's go!", optionalButtonTitle: "About Apple Maps & Privacy...", optionalButtonURL: URL(string: "https://apple.com"))
     ]
     
     var body: some View {
@@ -81,10 +81,24 @@ struct ContentView: View {
             showSheet.toggle()
         }
         .padding()
-        .welcomeSheet(isPresented: $showSheet, onDismiss: { sheetDismissed() }, isSlideToDismissDisabled: true, pages: pages)
+        .welcomeSheet(isPresented: $showSheet, onDismiss: { sheetDismissed() }, isSlideToDismissDisabled: true, pages: pages) // Sheet from page array
+//        .welcomeSheet(isPresented: $showSheet, onDismiss: { sheetDismissed() }, isSlideToDismissDisabled: true, pages: getPagesFromJSON()) // Sheet from JSON
     }
     
     func sheetDismissed() {
         print("Sheet dismissed")
+    }
+    
+    func getPagesFromJSON() -> [WelcomeSheetPage] {
+        if let url = Bundle.main.url(forResource: "demo", withExtension: "json") {
+            do {
+                let jsonData = try Data(contentsOf: url)
+                let decoder = JSONDecoder()
+                return try decoder.decode([WelcomeSheetPage].self, from: jsonData)
+            } catch {
+                print(error)
+            }
+        }
+        return []
     }
 }
