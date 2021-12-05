@@ -28,7 +28,7 @@ public struct WelcomeSheetPage: Identifiable {
     public var isShowingOptionalButton = false
     /// Title for an optional button.
     public var optionalButtonTitle: String?
-    /// URL to open for an optional button.
+    /// URL to open when an optional button is pressed.
     public var optionalButtonURL: URL?
     
     
@@ -54,7 +54,7 @@ public struct WelcomeSheetPage: Identifiable {
     }
     
     /// Creates welcome sheet page with given title, rows and main button title. Tints buttons with specified colour. Sets optional button with entered title and URL to open.
-    public init(title: String, rows: [WelcomeSheetPageRow], mainButtonTitle: String? = nil, accentColor: Color, optionalButtonTitle: String, optionalButtonURL: URL?) {
+    public init(title: String, rows: [WelcomeSheetPageRow], accentColor: Color, mainButtonTitle: String? = nil, optionalButtonTitle: String, optionalButtonURL: URL?) {
         self.init(title: title, rows: rows, mainButtonTitle: mainButtonTitle)
         self.accentColor = accentColor
         self.isShowingOptionalButton = true
