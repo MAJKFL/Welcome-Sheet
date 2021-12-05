@@ -90,6 +90,45 @@ WelcomeSheetPageRow(imageSystemName: "ipad.and.iphone", // Or `image: Image("Exa
 - `title` - Title displayed over a content.
 - `content` - Text displayed beneath a title.
 
+## Decodable support
+
+You can decode pages from JSON.
+
+```JSON
+[
+   {
+      "optionalButtonURL":"https:\/\/github.com\/MAJKFL\/Welcome-Sheet",
+      "accentColor":"BF5AF2",
+      "isShowingOptionalButton":true,
+      "title":"Welcome to Welcome Sheet",
+      "rows":[
+         {
+            "accentColor":"63E6E1",
+            "title":"Quick Creation",
+            "content":"Sheet creation is incredibly intuitive. Simply create an array of pages filled with your content.",
+            "imageName":"rectangle.stack.fill.badge.plus"
+         },
+         {
+            "accentColor":"5E5CE6",
+            "title":"Highly Customizable",
+            "content":"Set accent colors, add optional buttons, disable dismiss gestures, perform actions after button taps or sheet dismissal and more!",
+            "imageName":"gears"
+         },
+         {
+            "accentColor":"30D158",
+            "title":"Works out of the box",
+            "content":"Don't worry about different screen sizes. Your Welcome Sheet will look gorgeous on every iOS device!",
+            "imageName":"ipad.and.iphone"
+         }
+      ],
+      "optionalButtonTitle":"About Welcome Sheet...",
+      "mainButtonTitle":"Continue"
+   }
+]
+```
+
+**Note:** `imageName` can store asset catalogue image name or SF Symbol name.
+
 ## Installation
 
 Using Swift Package Manager
