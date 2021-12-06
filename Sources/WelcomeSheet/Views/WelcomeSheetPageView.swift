@@ -148,6 +148,7 @@ struct WelcomeSheetPageView: View {
             .padding(.horizontal, 15 + iPhoneDimensions.horizontalPaddingAddend)
             .padding(.bottom, 60)
         }
+        .background(page.backgroundColor?.edgesIgnoringSafeArea(.all))
     }
 }
 
