@@ -33,8 +33,6 @@ public struct WelcomeSheetPage: Identifiable, Decodable {
     public var mainButtonTitle: String
     /// Color used for buttons. When set to nil, uses default accent colour.
     public var accentColor: Color?
-    /// Color used for page's background. When set to nil, uses default background colour.
-    public var backgroundColor: Color?
     
     
     /// Specifies whether to show an optional button.
@@ -53,25 +51,22 @@ public struct WelcomeSheetPage: Identifiable, Decodable {
     }
     
     /// Creates welcome sheet page with given title, rows and main button title. Tints buttons with specified colour.
-    public init(title: String, rows: [WelcomeSheetPageRow], mainButtonTitle: String? = nil, backgroundColor: Color? = nil, accentColor: Color) {
+    public init(title: String, rows: [WelcomeSheetPageRow], mainButtonTitle: String? = nil, accentColor: Color) {
         self.init(title: title, rows: rows, mainButtonTitle: mainButtonTitle)
-        self.backgroundColor = backgroundColor
         self.accentColor = accentColor
     }
     
     /// Creates welcome sheet page with given title, rows and main button title. Sets optional button with entered title and URL to open.
-    public init(title: String, rows: [WelcomeSheetPageRow], mainButtonTitle: String? = nil, backgroundColor: Color? = nil, optionalButtonTitle: String, optionalButtonURL: URL?) {
+    public init(title: String, rows: [WelcomeSheetPageRow], mainButtonTitle: String? = nil, optionalButtonTitle: String, optionalButtonURL: URL?) {
         self.init(title: title, rows: rows, mainButtonTitle: mainButtonTitle)
-        self.backgroundColor = backgroundColor
         self.isShowingOptionalButton = true
         self.optionalButtonTitle = optionalButtonTitle
         self.optionalButtonURL = optionalButtonURL
     }
     
     /// Creates welcome sheet page with given title, rows and main button title. Tints buttons with specified colour. Sets optional button with entered title and URL to open.
-    public init(title: String, rows: [WelcomeSheetPageRow], accentColor: Color, mainButtonTitle: String? = nil, backgroundColor: Color? = nil, optionalButtonTitle: String, optionalButtonURL: URL?) {
+    public init(title: String, rows: [WelcomeSheetPageRow], accentColor: Color, mainButtonTitle: String? = nil, optionalButtonTitle: String, optionalButtonURL: URL?) {
         self.init(title: title, rows: rows, mainButtonTitle: mainButtonTitle)
-        self.backgroundColor = backgroundColor
         self.accentColor = accentColor
         self.isShowingOptionalButton = true
         self.optionalButtonTitle = optionalButtonTitle
@@ -94,13 +89,6 @@ public struct WelcomeSheetPage: Identifiable, Decodable {
             accentColor = Color(hex: colorHex)
         } catch {
             accentColor = nil
-        }
-        
-        do {
-            let colorHex = try container.decode(String.self, forKey: .backgroundColor)
-            backgroundColor = Color(hex: colorHex)
-        } catch {
-            backgroundColor = nil
         }
         
         do {
