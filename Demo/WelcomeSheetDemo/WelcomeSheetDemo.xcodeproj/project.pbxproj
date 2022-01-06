@@ -13,7 +13,7 @@
 		3A1EC39A2752B0E70005F216 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1EC3882752B0E70005F216 /* ContentView.swift */; };
 		3A1EC39B2752B0E70005F216 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A1EC3892752B0E70005F216 /* Assets.xcassets */; };
 		3A1EC39C2752B0E70005F216 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A1EC3892752B0E70005F216 /* Assets.xcassets */; };
-		3A1EC3A72752B17C0005F216 /* WelcomeSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 3A1EC3A62752B17C0005F216 /* WelcomeSheet */; };
+		3A24D9182780E67E008ED193 /* WelcomeSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 3A24D9172780E67E008ED193 /* WelcomeSheet */; };
 		3A75F403275D1E30009E94E6 /* demo.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A75F402275D1E30009E94E6 /* demo.json */; };
 		3A75F404275D1E30009E94E6 /* demo.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A75F402275D1E30009E94E6 /* demo.json */; };
 /* End PBXBuildFile section */
@@ -33,7 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A1EC3A72752B17C0005F216 /* WelcomeSheet in Frameworks */,
+				3A24D9182780E67E008ED193 /* WelcomeSheet in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,7 +101,7 @@
 			);
 			name = "WelcomeSheetDemo (iOS)";
 			packageProductDependencies = (
-				3A1EC3A62752B17C0005F216 /* WelcomeSheet */,
+				3A24D9172780E67E008ED193 /* WelcomeSheet */,
 			);
 			productName = "WelcomeSheetDemo (iOS)";
 			productReference = 3A1EC38E2752B0E70005F216 /* WelcomeSheetDemo.app */;
@@ -132,7 +132,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1310;
-				LastUpgradeCheck = 1310;
+				LastUpgradeCheck = 1320;
 				TargetAttributes = {
 					3A1EC38D2752B0E70005F216 = {
 						CreatedOnToolsVersion = 13.1;
@@ -152,7 +152,7 @@
 			);
 			mainGroup = 3A1EC3812752B0E70005F216;
 			packageReferences = (
-				3A1EC3A52752B17C0005F216 /* XCRemoteSwiftPackageReference "WelcomeSheet" */,
+				3A24D9162780E67E008ED193 /* XCRemoteSwiftPackageReference "Welcome-Sheet" */,
 			);
 			productRefGroup = 3A1EC38F2752B0E70005F216 /* Products */;
 			projectDirPath = "";
@@ -385,6 +385,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -413,6 +414,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -468,9 +470,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		3A1EC3A52752B17C0005F216 /* XCRemoteSwiftPackageReference "WelcomeSheet" */ = {
+		3A24D9162780E67E008ED193 /* XCRemoteSwiftPackageReference "Welcome-Sheet" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = /Users/jakubflorek/Developer/Apple/WelcomeSheet;
+			repositoryURL = "https://github.com/MAJKFL/Welcome-Sheet";
 			requirement = {
 				branch = main;
 				kind = branch;
@@ -479,9 +481,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3A1EC3A62752B17C0005F216 /* WelcomeSheet */ = {
+		3A24D9172780E67E008ED193 /* WelcomeSheet */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3A1EC3A52752B17C0005F216 /* XCRemoteSwiftPackageReference "WelcomeSheet" */;
+			package = 3A24D9162780E67E008ED193 /* XCRemoteSwiftPackageReference "Welcome-Sheet" */;
 			productName = WelcomeSheet;
 		};
 /* End XCSwiftPackageProductDependency section */
