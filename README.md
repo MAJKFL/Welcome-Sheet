@@ -4,6 +4,10 @@
 
 Welcome sheet for swiftUI enables incredibly easy way for creating onboarding screens, update notes, or whatever you imagine! The main idea standing behind this project was to follow the design of Apple’s native onboarding screens as much as possible, that’s why you can be always sure they will look gorgeous on iPhone SE screen as well as on iPad Pro’s massive 12,9” display!
 
+<p align="center">
+    <img src="Documentation/WelcomeSheetPromo.gif">
+</p>
+
 ## Usage
 To create a welcome sheet simply add .welcomeSheet view modifier to your view and pass page array as an argument.
 ```swift
