@@ -138,7 +138,7 @@ You can decode pages from JSON.
 Using Swift Package Manager
 
 ```
-.package(url: "https://github.com/MAJKFL/Welcome-Sheet", from: "0.1.0"),
+.package(url: "https://github.com/MAJKFL/Welcome-Sheet", from: "0.1.1"),
 ```
 
 ## Example
