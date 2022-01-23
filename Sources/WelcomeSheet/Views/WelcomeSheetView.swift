@@ -24,5 +24,6 @@ struct WelcomeSheetView: View {
                 }
             }
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
