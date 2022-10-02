@@ -2,13 +2,13 @@
 
 import SwiftUI
 
-class ModalUIHostingController<Content>: UIHostingController<Content>, UIPopoverPresentationControllerDelegate where Content : View {
+public class ModalUIHostingController<Content>: UIHostingController<Content>, UIPopoverPresentationControllerDelegate where Content : View {
     var isDismissedBySliding: Bool
     let onDismiss: (() -> Void)
     
     required init?(coder: NSCoder) { fatalError("") }
     
-    init(onDismiss: @escaping () -> Void, isSlideToDismissDisabled: Bool, rootView: Content) {
+    public init(onDismiss: @escaping () -> Void, isSlideToDismissDisabled: Bool, rootView: Content) {
         self.onDismiss = onDismiss
         self.isDismissedBySliding = false
         super.init(rootView: rootView)
@@ -18,7 +18,7 @@ class ModalUIHostingController<Content>: UIHostingController<Content>, UIPopover
         isModalInPresentation = isSlideToDismissDisabled
     }
     
-    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+    public func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         isDismissedBySliding = true
         onDismiss()
     }
