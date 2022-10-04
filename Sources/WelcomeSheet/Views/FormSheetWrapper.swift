@@ -2,115 +2,63 @@
 
 import SwiftUI
 
-public class ModalUIHostingController<Content>: UIHostingController<Content>, UIPopoverPresentationControllerDelegate where Content : View {
-    var isDismissedBySliding: Bool
-    let onDismiss: (() -> Void)
+class ModalUIHostingController: UIHostingController<WelcomeSheetView>, UIPopoverPresentationControllerDelegate {
+    var onDismiss: () -> Void
     
     required init?(coder: NSCoder) { fatalError("") }
     
-    public init(onDismiss: @escaping () -> Void, isSlideToDismissDisabled: Bool, rootView: Content) {
-        self.onDismiss = onDismiss
-        self.isDismissedBySliding = false
+    override init(rootView: WelcomeSheetView) {
+        self.onDismiss = rootView.onDismiss
         super.init(rootView: rootView)
-        preferredContentSize = CGSize(width: iPadSheetDimensions.width, height: iPadSheetDimensions.height)
+        
+        self.rootView.onDismiss = { [weak self] in
+            rootView.onDismiss()
+            self?.dismiss(animated: true)
+        }
+        
         modalPresentationStyle = .formSheet
+        preferredContentSize = CGSize(width: iPadSheetDimensions.width, height: iPadSheetDimensions.height)
         presentationController?.delegate = self
-        isModalInPresentation = isSlideToDismissDisabled
     }
     
-    public func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
-        isDismissedBySliding = true
-        onDismiss()
-    }
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) { onDismiss() }
 }
 
-class ModalUIViewController<Content: View>: UIViewController {
-    var shouldUpdate: Bool
-    
-    let isPresented: Bool
-    let isSlideToDismissDisabled: Bool
-    let content: () -> Content
-    let onDismiss: () -> Void
-    var hostVC: ModalUIHostingController<Content>
-    
-    private var isViewDidAppear = false
-    
-    required init?(coder: NSCoder) { fatalError("") }
-    
-    init(isPresented: Bool = false, onDismiss: @escaping () -> Void, isSlideToDismissDisabled: Bool, content: @escaping () -> Content) {
-        self.isSlideToDismissDisabled = isSlideToDismissDisabled
-        self.shouldUpdate = isPresented
-        self.isPresented = isPresented
-        self.onDismiss = onDismiss
-        self.content = content
-        self.hostVC = ModalUIHostingController(onDismiss: onDismiss, isSlideToDismissDisabled: isSlideToDismissDisabled, rootView: content())
-        super.init(nibName: nil, bundle: nil)
-    }
+class ModalUIViewController: UIViewController {
+    var isSlideToDismissDisabled: Bool?
+    var welcomeSheetView: WelcomeSheetView?
     
     func show() {
-        guard isViewDidAppear else { return }
-        self.hostVC = ModalUIHostingController(onDismiss: onDismiss, isSlideToDismissDisabled: isSlideToDismissDisabled, rootView: content())
-        shouldUpdate = true
+        guard let welcomeSheetView else { return }
+        let hostVC = ModalUIHostingController(rootView: welcomeSheetView)
+        hostVC.isModalInPresentation = isSlideToDismissDisabled ?? false
         present(hostVC, animated: true)
-    }
-    
-    func hide() {
-        guard !hostVC.isBeingDismissed else { return }
-        
-        shouldUpdate = false
-
-        dismiss(animated: true) {
-            self.hostVC.presentationControllerDidDismiss(self.presentationController!)
-        }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        isViewDidAppear = true
-        if isPresented {
-            show()
-        }
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        isViewDidAppear = false
-    }
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        show()
     }
 }
 
-struct FormSheet<Content: View> : UIViewControllerRepresentable {
-    @Binding var show: Bool
-    
-    let onDismiss: () -> Void
+struct FormSheet: UIViewControllerRepresentable {
+    let show: Bool
     let isSlideToDismissDisabled: Bool
-    let content: () -> Content
+    let welcomeSheetView: WelcomeSheetView
     
-    func makeUIViewController(context: UIViewControllerRepresentableContext<FormSheet<Content>>) -> ModalUIViewController<Content> {
-        let onDismiss = {
-            self.onDismiss()
-            self.show = false
-        }
-        
-        let vc = ModalUIViewController(isPresented: show, onDismiss: onDismiss, isSlideToDismissDisabled: isSlideToDismissDisabled, content: content)
+    func makeUIViewController(context: UIViewControllerRepresentableContext<FormSheet>) -> ModalUIViewController {
+        let vc = ModalUIViewController()
+        vc.welcomeSheetView = welcomeSheetView
+        vc.isSlideToDismissDisabled = isSlideToDismissDisabled
         return vc
     }
     
-    func updateUIViewController(_ uiViewController: ModalUIViewController<Content>, context: UIViewControllerRepresentableContext<FormSheet<Content>>) {
+    func updateUIViewController(_ uiViewController: ModalUIViewController, context: UIViewControllerRepresentableContext<FormSheet>) {
         if show {
             uiViewController.show()
-        } else if !uiViewController.hostVC.isDismissedBySliding && uiViewController.shouldUpdate {
-            uiViewController.hide()
+        } else {
+            uiViewController.dismiss(animated: true)
         }
     }
 }
 
 extension View {
-    func formSheet<Content: View>(isPresented: Binding<Bool>, onDismiss: @escaping () -> Void, isSlideToDismissDisabled: Bool, @ViewBuilder content: @escaping () -> Content) -> some View {
-        self.background(FormSheet(show: isPresented, onDismiss: onDismiss, isSlideToDismissDisabled: isSlideToDismissDisabled, content: content))
+    func formSheet(isPresented: Bool, isSlideToDismissDisabled: Bool, welcomeSheetView: WelcomeSheetView) -> some View {
+        self.background(FormSheet(show: isPresented, isSlideToDismissDisabled: isSlideToDismissDisabled, welcomeSheetView: welcomeSheetView))
     }
 }

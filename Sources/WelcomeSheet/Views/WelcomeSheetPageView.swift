@@ -1,6 +1,6 @@
 //
 //  WelcomeSheetPageView.swift
-//  
+//
 //
 //  Created by Jakub Florek on 27/11/2021.
 //
@@ -8,10 +8,9 @@
 import SwiftUI
 
 struct WelcomeSheetPageView: View {
-    @Environment(\.showingSheet) var showingSheet
-    
     let page: WelcomeSheetPage
     let restPages: [WelcomeSheetPage]
+    let onDismiss: () -> Void
     
     let isiPad = UIDevice.current.userInterfaceIdiom == .pad
     
@@ -107,7 +106,7 @@ struct WelcomeSheetPageView: View {
                 
                 if let nextPage = restPages.first {
                     NavigationLink {
-                        WelcomeSheetPageView(page: nextPage, restPages: restPages.filter({ $0.id != nextPage.id }))
+                        WelcomeSheetPageView(page: nextPage, restPages: restPages.filter({ $0.id != nextPage.id }), onDismiss: onDismiss)
                     } label: {
                         ZStack {
                             page.accentColor ?? Color.accentColor
@@ -126,7 +125,7 @@ struct WelcomeSheetPageView: View {
                     .padding(.top)
                 } else {
                     Button {
-                        showingSheet?.wrappedValue = false
+                        onDismiss()
                     } label: {
                         ZStack {
                             page.accentColor ?? Color.accentColor

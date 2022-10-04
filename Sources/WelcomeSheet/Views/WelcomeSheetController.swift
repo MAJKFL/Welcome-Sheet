@@ -5,34 +5,26 @@
 //  Created by Kevin Romero Peces-Barba on 2/10/22.
 //
 
-import SwiftUI
+import UIKit
 
 public class WelcomeSheetController {
-    private var _showSheet: Bool = false
-    private lazy var showSheet: Binding<Bool> = .init {
-        self._showSheet
-    } set: { newValue in
-        self._showSheet = newValue
-        self.onDismiss()
-    }
-    private var welcomeView: some View {
-        WelcomeSheetView(pages: pages)
-            .environment(\.showingSheet, showSheet)
-    }
-
-    private var pages: [WelcomeSheetPage]
-    private var onDismiss: () -> Void
-
-    init(pages: [WelcomeSheetPage], onDismiss: @escaping () -> Void) {
+    var pages: [WelcomeSheetPage]
+    var isSlideToDismissDisabled: Bool
+    var onDismiss: () -> Void
+    
+    init(pages: [WelcomeSheetPage], isSlideToDismissDisabled: Bool = false, onDismiss: @escaping () -> Void = {}) {
         self.pages = pages
+        self.isSlideToDismissDisabled = isSlideToDismissDisabled
         self.onDismiss = onDismiss
     }
 
     func get() -> UIViewController {
-        return ModalUIHostingController(onDismiss: onDismiss, isSlideToDismissDisabled: true, rootView: welcomeView)
+        let hc = ModalUIHostingController(rootView: WelcomeSheetView(pages: pages, onDismiss: onDismiss))
+        hc.isModalInPresentation = isSlideToDismissDisabled
+        return hc
     }
-
-    public static func get(pages: [WelcomeSheetPage], onDismiss: @escaping () -> Void) -> UIViewController {
-        WelcomeSheetController(pages: pages, onDismiss: onDismiss).get()
+    
+    public static func get(pages: [WelcomeSheetPage], isSlideToDismissDisabled: Bool = false, onDismiss: @escaping () -> Void = {}) -> UIViewController {
+        WelcomeSheetController(pages: pages, isSlideToDismissDisabled: isSlideToDismissDisabled, onDismiss: onDismiss).get()
     }
 }

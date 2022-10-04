@@ -15,20 +15,14 @@ struct WelcomeSheet: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .formSheet(isPresented: $showSheet, onDismiss: onDismiss, isSlideToDismissDisabled: isSlideToDismissDisabled, content: {
-                WelcomeSheetView(pages: pages).environment(\.showingSheet, $showSheet)
-            })
+            .formSheet(isPresented: showSheet, isSlideToDismissDisabled: isSlideToDismissDisabled, welcomeSheetView: WelcomeSheetView(pages: pages, onDismiss: getOnDismiss()))
     }
-}
-
-struct ShowingSheetKey: EnvironmentKey {
-    static let defaultValue: Binding<Bool>? = nil
-}
-
-extension EnvironmentValues {
-    var showingSheet: Binding<Bool>? {
-        get { self[ShowingSheetKey.self] }
-        set { self[ShowingSheetKey.self] = newValue }
+    
+    func getOnDismiss() -> () -> Void {
+        return {
+            showSheet = false
+            onDismiss()
+        }
     }
 }
 
