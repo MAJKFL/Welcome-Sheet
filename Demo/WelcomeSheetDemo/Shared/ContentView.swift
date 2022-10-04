@@ -11,8 +11,21 @@ import WelcomeSheet
 struct ContentView: View {
     @State private var showSheet = false
     
-    let pages = [
-        WelcomeSheetPage(title: "Welcome to Welcome Sheet", rows: [
+    var body: some View {
+        Button("Show sheet") {
+            showSheet.toggle()
+        }
+        .padding()
+        .welcomeSheet(isPresented: $showSheet, onDismiss: { sheetDismissed() }, isSlideToDismissDisabled: true, pages: getPages()) // Sheet from page array
+//        .welcomeSheet(isPresented: $showSheet, onDismiss: { sheetDismissed() }, isSlideToDismissDisabled: true, pages: getPagesFromJSON()) // Sheet from JSON
+    }
+    
+    func sheetDismissed() {
+        print("Sheet dismissed")
+    }
+    
+    func getPages() -> [WelcomeSheetPage] {
+        [WelcomeSheetPage(title: "Welcome to Welcome Sheet", rows: [
             WelcomeSheetPageRow(imageSystemName: "rectangle.stack.fill.badge.plus",
                                 accentColor: Color.mint,
                                 title: "Quick Creation",
@@ -56,7 +69,7 @@ struct ContentView: View {
                                 accentColor: Color.orange,
                                 title: "Suggestions and Smart Lists",
                                 content: "Suggestions help you organize quickly, and smart lists automatically group reminders.")
-        ], accentColor: Color.blue),
+        ], accentColor: Color.blue, optionalButtonTitle: "Show Terms and Conditions", optionalButtonView: { Text("Terms and Conditions") }),
         
         WelcomeSheetPage(title: "What's New in Maps", rows: [
             WelcomeSheetPageRow(imageSystemName: "map.fill",
@@ -74,19 +87,7 @@ struct ContentView: View {
                                 title: "Improved Search",
                                 content: "Finding places is now easier with filters and automatic updates when you're browsing results on the map.")
         ], accentColor: Color.pink, mainButtonTitle: "Let's go!", optionalButtonTitle: "About Apple Maps & Privacy...", optionalButtonURL: URL(string: "https://apple.com"))
-    ]
-    
-    var body: some View {
-        Button("Show sheet") {
-            showSheet.toggle()
-        }
-        .padding()
-        .welcomeSheet(isPresented: $showSheet, onDismiss: { sheetDismissed() }, isSlideToDismissDisabled: true, pages: pages) // Sheet from page array
-//        .welcomeSheet(isPresented: $showSheet, onDismiss: { sheetDismissed() }, isSlideToDismissDisabled: true, pages: getPagesFromJSON()) // Sheet from JSON
-    }
-    
-    func sheetDismissed() {
-        print("Sheet dismissed")
+        ]
     }
     
     func getPagesFromJSON() -> [WelcomeSheetPage] {

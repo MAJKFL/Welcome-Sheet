@@ -15,6 +15,8 @@ struct WelcomeSheetPageView: View {
     
     let isiPad = UIDevice.current.userInterfaceIdiom == .pad
     
+    @State private var optionalView: AnyView?
+    
     var body: some View {
         if #available(iOS 14.0, *) {
             content
@@ -94,7 +96,11 @@ struct WelcomeSheetPageView: View {
                 if page.isShowingOptionalButton {
                     if let optionalButtonTitle = page.optionalButtonTitle {
                         Button(optionalButtonTitle) {
-                            if let url = page.optionalButtonURL {
+                            if let view = page.optionalButtonView {
+                                optionalView = view
+                            } else if let action = page.optionalButtonAction {
+                                action()
+                            } else if let url = page.optionalButtonURL {
                                 UIApplication.shared.open(url)
                             }
                         }
@@ -147,6 +153,9 @@ struct WelcomeSheetPageView: View {
             }
             .padding(.horizontal, 15 + iPhoneDimensions.horizontalPaddingAddend)
             .padding(.bottom, 60)
+            .sheet(item: $optionalView) { view in
+                view
+            }
         }
     }
 }
@@ -159,4 +168,10 @@ extension HorizontalAlignment {
     }
 
     static let midIcons = HorizontalAlignment(MidIcons.self)
+}
+
+extension AnyView: Identifiable {
+    public var id: UUID {
+        UUID()
+    }
 }
