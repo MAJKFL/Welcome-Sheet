@@ -37,20 +37,15 @@ public struct WelcomeSheetPageRow: Identifiable, Decodable {
         self.title = title
         self.content = content
     }
-    
-    /// Creates welcome sheet page row with system image, given title and content.
-    public init(imageSystemName: String, title: String, content: String) {
-        self.init(image: Image(systemName: imageSystemName), title: title, content: content)
-    }
 
     /// Creates welcome sheet page row with given image, title and content. Tints image with specified colour.
-    public init(image: Image, accentColor: Color, title: String, content: String) {
+    public init(image: Image, accentColor: Color? = nil, title: String, content: String) {
         self.init(image: image, title: title, content: content)
         self.accentColor = accentColor
     }
 
     /// Creates welcome sheet page row with system image, given title and content. Tints image with specified colour.
-    public init(imageSystemName: String, accentColor: Color, title: String, content: String) {
+    public init(imageSystemName: String, accentColor: Color? = nil, title: String, content: String) {
         self.init(image: Image(systemName: imageSystemName), title: title, content: content)
         self.accentColor = accentColor
     }

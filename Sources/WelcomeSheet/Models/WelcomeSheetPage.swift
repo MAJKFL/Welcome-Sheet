@@ -33,6 +33,8 @@ public struct WelcomeSheetPage: Identifiable, Decodable {
     public var mainButtonTitle: String
     /// Color used for buttons. When set to nil, uses default accent colour.
     public var accentColor: Color?
+    /// Sheet's background color.
+    public var backgroundColor: Color?
     
     
     /// Specifies whether to show optional button.
@@ -48,11 +50,12 @@ public struct WelcomeSheetPage: Identifiable, Decodable {
     
     
     /// Creates welcome sheet page.
-    public init(title: String, rows: [WelcomeSheetPageRow], accentColor: Color? = nil, mainButtonTitle: String? = nil, optionalButtonTitle: String? = nil, optionalButtonURL: URL? = nil, optionalButtonAction: (() -> ())? = nil) {
+    public init(title: String, rows: [WelcomeSheetPageRow], accentColor: Color? = nil, backgroundColor: Color? = nil, mainButtonTitle: String? = nil, optionalButtonTitle: String? = nil, optionalButtonURL: URL? = nil, optionalButtonAction: (() -> ())? = nil) {
         self.title = title
         self.rows = rows
         self.mainButtonTitle = mainButtonTitle ?? "Continue"
         self.accentColor = accentColor
+        self.backgroundColor = backgroundColor
         self.isShowingOptionalButton = true
         self.optionalButtonTitle = optionalButtonTitle
         self.optionalButtonURL = optionalButtonURL
@@ -60,8 +63,8 @@ public struct WelcomeSheetPage: Identifiable, Decodable {
     }
     
     /// Creates welcome sheet page with custom optional button view.
-    public init(title: String, rows: [WelcomeSheetPageRow], accentColor: Color? = nil, mainButtonTitle: String? = nil, optionalButtonTitle: String? = nil, optionalButtonURL: URL? = nil, optionalButtonAction: (() -> ())? = nil, optionalButtonView: (() -> some View)? = nil) {
-        self.init(title: title, rows: rows, accentColor: accentColor, mainButtonTitle: mainButtonTitle, optionalButtonTitle: optionalButtonTitle, optionalButtonURL: optionalButtonURL, optionalButtonAction: optionalButtonAction)
+    public init(title: String, rows: [WelcomeSheetPageRow], accentColor: Color? = nil, backgroundColor: Color? = nil, mainButtonTitle: String? = nil, optionalButtonTitle: String? = nil, optionalButtonURL: URL? = nil, optionalButtonAction: (() -> ())? = nil, optionalButtonView: (() -> some View)? = nil) {
+        self.init(title: title, rows: rows, accentColor: accentColor, backgroundColor: backgroundColor, mainButtonTitle: mainButtonTitle, optionalButtonTitle: optionalButtonTitle, optionalButtonURL: optionalButtonURL, optionalButtonAction: optionalButtonAction)
         
         if let optionalButtonView {
             self.optionalButtonView = AnyView(optionalButtonView())

@@ -156,6 +156,10 @@ struct WelcomeSheetPageView: View {
                 view
             }
         }
+        .background(
+            page.backgroundColor
+                .edgesIgnoringSafeArea(.all)
+        )
     }
 }
 
