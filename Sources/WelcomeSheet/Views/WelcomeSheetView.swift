@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct WelcomeSheetView: View {
+public struct WelcomeSheetView: View {
     var pages: [WelcomeSheetPage]
     var onDismiss: () -> Void
     
-    var body: some View {
+    public var body: some View {
         NavigationView {
             if let firstPage = pages.first {
                 if #available(iOS 14.0, *) {

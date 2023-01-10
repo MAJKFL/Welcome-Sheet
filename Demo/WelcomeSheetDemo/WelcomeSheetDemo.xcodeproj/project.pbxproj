@@ -13,9 +13,9 @@
 		3A1EC39A2752B0E70005F216 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1EC3882752B0E70005F216 /* ContentView.swift */; };
 		3A1EC39B2752B0E70005F216 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A1EC3892752B0E70005F216 /* Assets.xcassets */; };
 		3A1EC39C2752B0E70005F216 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A1EC3892752B0E70005F216 /* Assets.xcassets */; };
-		3A24D9182780E67E008ED193 /* WelcomeSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 3A24D9172780E67E008ED193 /* WelcomeSheet */; };
 		3A75F403275D1E30009E94E6 /* demo.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A75F402275D1E30009E94E6 /* demo.json */; };
 		3A75F404275D1E30009E94E6 /* demo.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A75F402275D1E30009E94E6 /* demo.json */; };
+		D74557F528EEBA6E0025C195 /* WelcomeSheet in Frameworks */ = {isa = PBXBuildFile; productRef = D74557F428EEBA6E0025C195 /* WelcomeSheet */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +26,7 @@
 		3A1EC3942752B0E70005F216 /* WelcomeSheetDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WelcomeSheetDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A1EC3962752B0E70005F216 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		3A75F402275D1E30009E94E6 /* demo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = demo.json; sourceTree = "<group>"; };
+		D74557F228EEBA560025C195 /* Welcome-Sheet */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "Welcome-Sheet"; path = ../..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,7 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A24D9182780E67E008ED193 /* WelcomeSheet in Frameworks */,
+				D74557F528EEBA6E0025C195 /* WelcomeSheet in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,7 +53,9 @@
 			children = (
 				3A1EC3862752B0E70005F216 /* Shared */,
 				3A1EC3952752B0E70005F216 /* macOS */,
+				D74557F128EEBA560025C195 /* Packages */,
 				3A1EC38F2752B0E70005F216 /* Products */,
+				D74557F328EEBA6E0025C195 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -84,6 +87,21 @@
 			path = macOS;
 			sourceTree = "<group>";
 		};
+		D74557F128EEBA560025C195 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				D74557F228EEBA560025C195 /* Welcome-Sheet */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		D74557F328EEBA6E0025C195 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -101,7 +119,7 @@
 			);
 			name = "WelcomeSheetDemo (iOS)";
 			packageProductDependencies = (
-				3A24D9172780E67E008ED193 /* WelcomeSheet */,
+				D74557F428EEBA6E0025C195 /* WelcomeSheet */,
 			);
 			productName = "WelcomeSheetDemo (iOS)";
 			productReference = 3A1EC38E2752B0E70005F216 /* WelcomeSheetDemo.app */;
@@ -152,7 +170,6 @@
 			);
 			mainGroup = 3A1EC3812752B0E70005F216;
 			packageReferences = (
-				3A24D9162780E67E008ED193 /* XCRemoteSwiftPackageReference "Welcome-Sheet" */,
 			);
 			productRefGroup = 3A1EC38F2752B0E70005F216 /* Products */;
 			projectDirPath = "";
@@ -469,21 +486,9 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		3A24D9162780E67E008ED193 /* XCRemoteSwiftPackageReference "Welcome-Sheet" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/MAJKFL/Welcome-Sheet";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
-		3A24D9172780E67E008ED193 /* WelcomeSheet */ = {
+		D74557F428EEBA6E0025C195 /* WelcomeSheet */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3A24D9162780E67E008ED193 /* XCRemoteSwiftPackageReference "Welcome-Sheet" */;
 			productName = WelcomeSheet;
 		};
 /* End XCSwiftPackageProductDependency section */

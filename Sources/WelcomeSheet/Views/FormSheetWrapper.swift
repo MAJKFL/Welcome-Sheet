@@ -2,7 +2,7 @@
 
 import SwiftUI
 
-class ModalUIHostingController: UIHostingController<WelcomeSheetView>, UIPopoverPresentationControllerDelegate {
+public class ModalUIHostingController: UIHostingController<WelcomeSheetView>, UIPopoverPresentationControllerDelegate {
     var onDismiss: () -> Void
     
     required init?(coder: NSCoder) { fatalError("") }
@@ -21,7 +21,7 @@ class ModalUIHostingController: UIHostingController<WelcomeSheetView>, UIPopover
         presentationController?.delegate = self
     }
     
-    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) { onDismiss() }
+    public func presentationControllerDidDismiss(_ presentationController: UIPresentationController) { onDismiss() }
 }
 
 class ModalUIViewController: UIViewController {

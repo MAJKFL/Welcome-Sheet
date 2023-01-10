@@ -18,7 +18,7 @@ struct ContentView: View {
                                 title: "Quick Creation",
                                 content: "It's incredibly intuitive. Simply declare an array of pages filled with content."),
             
-            WelcomeSheetPageRow(image: Image("gears"),
+            WelcomeSheetPageRow(imageNamed: "gears",
                                 accentColor: Color.indigo,
                                 title: "Highly Customisable", content: "Match sheet's appearance to your app, link buttons, perform actions after dismissal."),
             

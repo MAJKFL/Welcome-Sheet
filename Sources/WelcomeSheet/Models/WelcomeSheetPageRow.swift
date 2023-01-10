@@ -1,6 +1,6 @@
 //
 //  WelcomeSheetPageRow.swift
-//  
+//
 //
 //  Created by Jakub Florek on 27/11/2021.
 //
@@ -52,6 +52,12 @@ public struct WelcomeSheetPageRow: Identifiable, Decodable {
     /// Creates welcome sheet page row with system image, given title and content. Tints image with specified colour.
     public init(imageSystemName: String, accentColor: Color, title: String, content: String) {
         self.init(image: Image(systemName: imageSystemName), title: title, content: content)
+        self.accentColor = accentColor
+    }
+
+    /// Creates welcome sheet page row with named image, given title and content. Tints image with specified colour.
+    public init(imageNamed: String, accentColor: Color? = nil, title: String, content: String) {
+        self.init(image: Image(imageNamed), title: title, content: content)
         self.accentColor = accentColor
     }
     
