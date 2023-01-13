@@ -31,6 +31,7 @@ class ModalUIViewController: UIViewController {
     func show() {
         guard let welcomeSheetView else { return }
         let hostVC = ModalUIHostingController(rootView: welcomeSheetView)
+        hostVC.overrideUserInterfaceStyle = self.overrideUserInterfaceStyle
         hostVC.isModalInPresentation = isSlideToDismissDisabled ?? false
         present(hostVC, animated: true)
     }
@@ -39,12 +40,26 @@ class ModalUIViewController: UIViewController {
 struct FormSheet: UIViewControllerRepresentable {
     let show: Bool
     let isSlideToDismissDisabled: Bool
+    let preferredColorScheme: ColorScheme?
     let welcomeSheetView: WelcomeSheetView
+    
+    var userInterfaceStyle: UIUserInterfaceStyle? {        
+        if preferredColorScheme == .dark {
+            return .dark
+        } else {
+            return .light
+        }
+    }
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<FormSheet>) -> ModalUIViewController {
         let vc = ModalUIViewController()
         vc.welcomeSheetView = welcomeSheetView
         vc.isSlideToDismissDisabled = isSlideToDismissDisabled
+        
+        if let userInterfaceStyle {
+            vc.overrideUserInterfaceStyle = userInterfaceStyle
+        }
+        
         return vc
     }
     
@@ -58,7 +73,7 @@ struct FormSheet: UIViewControllerRepresentable {
 }
 
 extension View {
-    func formSheet(isPresented: Bool, isSlideToDismissDisabled: Bool, welcomeSheetView: WelcomeSheetView) -> some View {
-        self.background(FormSheet(show: isPresented, isSlideToDismissDisabled: isSlideToDismissDisabled, welcomeSheetView: welcomeSheetView))
+    func formSheet(isPresented: Bool, isSlideToDismissDisabled: Bool, preferredColorScheme: ColorScheme?, welcomeSheetView: WelcomeSheetView) -> some View {
+        self.background(FormSheet(show: isPresented, isSlideToDismissDisabled: isSlideToDismissDisabled, preferredColorScheme: preferredColorScheme, welcomeSheetView: welcomeSheetView))
     }
 }
