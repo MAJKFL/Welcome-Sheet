@@ -9,16 +9,16 @@ import UIKit
 
 public class WelcomeSheetController: ModalWelcomeSheetUIHostingController {
     /// Pages of the sheet.
-    var pages = [WelcomeSheetPage]() {
+    public var pages = [WelcomeSheetPage]() {
         didSet {
             rootView.pages = pages
         }
     }
     
     /// Action performed after dismissing the sheet.
-    override var onDismiss: () -> Void {
+    override public var onDismiss: () -> Void {
         didSet {
-            rootView.onDismiss = onDismiss
+            rootView.onDismiss = getOnDismiss(with: onDismiss)
         }
     }
     
@@ -32,7 +32,6 @@ public class WelcomeSheetController: ModalWelcomeSheetUIHostingController {
         super.init(rootView: WelcomeSheetView(pages: pages, onDismiss: onDismiss))
 
         self.pages = pages
-        self.onDismiss = onDismiss
         self.isModalInPresentation = isSlideToDismissDisabled
     }
     

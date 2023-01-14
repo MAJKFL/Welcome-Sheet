@@ -10,23 +10,27 @@ import SwiftUI
 public class ModalWelcomeSheetUIHostingController: UIHostingController<WelcomeSheetView>, UIPopoverPresentationControllerDelegate {
     var onDismiss: () -> Void
     
-    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") } // FIXME: Implement to make it work with storyboards
-    
-    override init(rootView: WelcomeSheetView) {
+    override internal init(rootView: WelcomeSheetView) {
         self.onDismiss = rootView.onDismiss
         super.init(rootView: rootView)
         
-        self.rootView.onDismiss = { [weak self] in
-            rootView.onDismiss()
-            self?.dismiss(animated: true)
-        }
+        self.rootView.onDismiss = getOnDismiss(with: rootView.onDismiss)
         
         modalPresentationStyle = .formSheet
         preferredContentSize = CGSize(width: iPadSheetDimensions.width, height: iPadSheetDimensions.height)
         presentationController?.delegate = self
     }
     
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") } // FIXME: Implement to make it work with storyboards
+    
     public func presentationControllerDidDismiss(_ presentationController: UIPresentationController) { onDismiss() }
+    
+    internal func getOnDismiss(with action: @escaping () -> Void) -> (() -> Void) {
+        return { [weak self] in
+            action()
+            self?.dismiss(animated: true)
+        }
+    }
 }
 
 class ModalWelcomeSheetUIViewController: UIViewController {
