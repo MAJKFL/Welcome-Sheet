@@ -7,54 +7,71 @@
 
 import SwiftUI
 
-/// A type that describes welcome sheet page row's content.
+/// Describes Welcome Sheet page row's content.
 public struct WelcomeSheetPageRow: Identifiable, Decodable {
     private enum CodingKeys : String, CodingKey {
-        case title
-        case content
-        case imageName
-        case accentColor
+        case title, content, imageName, accentColor
     }
     
     public var id = UUID()
     
     
-    /// Title displayed over a content.
+    /// Title displayed above the content.
     public var title: String
-    /// Text displayed beneath a title.
+    /// Text displayed beneath the title.
     public var content: String
     /// Image displayed at the beginning of a row.
     public var image: Image
     
     
-    /// Color used for an image. When set to nil, uses default accent colour.
+    /// Color used for image. When `nil`, uses default accent color.
     public var accentColor: Color?
     
     
-    /// Creates welcome sheet page row with given image, title and content.
-    public init(image: Image, title: String, content: String) {
+    // V SwiftUI Initializers V
+    
+    /// Creates Welcome Sheet page row with given image, title and content.
+    public init(image: Image, accentColor: Color? = nil, title: String, content: String) {
         self.image = image
+        self.accentColor = accentColor
         self.title = title
         self.content = content
     }
 
-    /// Creates welcome sheet page row with given image, title and content. Tints image with specified colour.
-    public init(image: Image, accentColor: Color? = nil, title: String, content: String) {
-        self.init(image: image, title: title, content: content)
-        self.accentColor = accentColor
-    }
-
-    /// Creates welcome sheet page row with system image, given title and content. Tints image with specified colour.
+    /// Creates Welcome Sheet page row with system image, given title and content. Tints image with specified colour.
     public init(imageSystemName: String, accentColor: Color? = nil, title: String, content: String) {
-        self.init(image: Image(systemName: imageSystemName), title: title, content: content)
-        self.accentColor = accentColor
+        self.init(image: Image(systemName: imageSystemName), accentColor: accentColor, title: title, content: content)
     }
 
-    /// Creates welcome sheet page row with named image, given title and content. Tints image with specified colour.
+    /// Creates Welcome Sheet page row with image name, given title and content. Tints image with specified colour.
     public init(imageNamed: String, accentColor: Color? = nil, title: String, content: String) {
-        self.init(image: Image(imageNamed), title: title, content: content)
-        self.accentColor = accentColor
+        self.init(image: Image(imageNamed), accentColor: accentColor, title: title, content: content)
     }
+    
+    // V UIKit initializers V
+    
+    /// Creates Welcome Sheet page row with given image, title and content. Tints image with specified colour.
+    public init(image: UIImage, accentColor: UIColor? = nil, title: String, content: String) {
+        var color: Color?
+        if let accentColor { color = Color(accentColor) }
+        self.init(image: Image(uiImage: image), accentColor: color, title: title, content: content)
+    }
+    
+    /// Creates Welcome Sheet page row with system image, given title and content. Tints image with specified colour.
+    public init(imageSystemName: String, accentColor: UIColor? = nil, title: String, content: String) {
+        var color: Color?
+        if let accentColor { color = Color(accentColor) }
+        self.init(image: Image(systemName: imageSystemName), accentColor: color, title: title, content: content)
+    }
+
+    /// Creates Welcome Sheet page row with image name, given title and content. Tints image with specified colour.
+    public init(imageNamed: String, accentColor: UIColor? = nil, title: String, content: String) {
+        var color: Color?
+        if let accentColor { color = Color(accentColor) }
+        self.init(image: Image(imageNamed), accentColor: color, title: title, content: content)
+    }
+    
+    // V Codable initializer V
     
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)

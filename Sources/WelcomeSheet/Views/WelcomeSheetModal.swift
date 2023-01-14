@@ -1,11 +1,16 @@
-// Source: https://stackoverflow.com/a/68481116
+//
+//  WelcomeSheetModal.swift
+//
+//
+//  Created by Jakub Florek on 14/01/2023.
+//
 
 import SwiftUI
 
-public class ModalUIHostingController: UIHostingController<WelcomeSheetView>, UIPopoverPresentationControllerDelegate {
+public class ModalWelcomeSheetUIHostingController: UIHostingController<WelcomeSheetView>, UIPopoverPresentationControllerDelegate {
     var onDismiss: () -> Void
     
-    required init?(coder: NSCoder) { fatalError("") }
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") } // FIXME: Implement to make it work with storyboards
     
     override init(rootView: WelcomeSheetView) {
         self.onDismiss = rootView.onDismiss
@@ -24,20 +29,20 @@ public class ModalUIHostingController: UIHostingController<WelcomeSheetView>, UI
     public func presentationControllerDidDismiss(_ presentationController: UIPresentationController) { onDismiss() }
 }
 
-class ModalUIViewController: UIViewController {
+class ModalWelcomeSheetUIViewController: UIViewController {
     var isSlideToDismissDisabled: Bool?
     var welcomeSheetView: WelcomeSheetView?
     
     func show() {
         guard let welcomeSheetView else { return }
-        let hostVC = ModalUIHostingController(rootView: welcomeSheetView)
+        let hostVC = ModalWelcomeSheetUIHostingController(rootView: welcomeSheetView)
         hostVC.overrideUserInterfaceStyle = self.overrideUserInterfaceStyle
         hostVC.isModalInPresentation = isSlideToDismissDisabled ?? false
         present(hostVC, animated: true)
     }
 }
 
-struct FormSheet: UIViewControllerRepresentable {
+struct ModalWelcomeSheetUIViewControllerRepresentable: UIViewControllerRepresentable {
     let show: Bool
     let isSlideToDismissDisabled: Bool
     let preferredColorScheme: ColorScheme?
@@ -51,8 +56,8 @@ struct FormSheet: UIViewControllerRepresentable {
         }
     }
     
-    func makeUIViewController(context: UIViewControllerRepresentableContext<FormSheet>) -> ModalUIViewController {
-        let vc = ModalUIViewController()
+    func makeUIViewController(context: UIViewControllerRepresentableContext<ModalWelcomeSheetUIViewControllerRepresentable>) -> ModalWelcomeSheetUIViewController {
+        let vc = ModalWelcomeSheetUIViewController()
         vc.welcomeSheetView = welcomeSheetView
         vc.isSlideToDismissDisabled = isSlideToDismissDisabled
         
@@ -63,17 +68,11 @@ struct FormSheet: UIViewControllerRepresentable {
         return vc
     }
     
-    func updateUIViewController(_ uiViewController: ModalUIViewController, context: UIViewControllerRepresentableContext<FormSheet>) {
+    func updateUIViewController(_ uiViewController: ModalWelcomeSheetUIViewController, context: UIViewControllerRepresentableContext<ModalWelcomeSheetUIViewControllerRepresentable>) {
         if show {
             uiViewController.show()
         } else {
             uiViewController.dismiss(animated: true)
         }
-    }
-}
-
-extension View {
-    func formSheet(isPresented: Bool, isSlideToDismissDisabled: Bool, preferredColorScheme: ColorScheme?, welcomeSheetView: WelcomeSheetView) -> some View {
-        self.background(FormSheet(show: isPresented, isSlideToDismissDisabled: isSlideToDismissDisabled, preferredColorScheme: preferredColorScheme, welcomeSheetView: welcomeSheetView))
     }
 }

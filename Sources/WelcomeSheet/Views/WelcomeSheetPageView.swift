@@ -17,13 +17,8 @@ struct WelcomeSheetPageView: View {
     @State private var optionalView: AnyView?
     
     var body: some View {
-        if #available(iOS 14.0, *) {
-            content
-                .ignoresSafeArea(.all, edges: .top)
-        } else {
-            content
-                .edgesIgnoringSafeArea(.top)
-        }
+        content
+            .edgesIgnoringSafeArea(.top)
     }
     
     var content: some View {
@@ -160,21 +155,5 @@ struct WelcomeSheetPageView: View {
             page.backgroundColor
                 .edgesIgnoringSafeArea(.all)
         )
-    }
-}
-
-extension HorizontalAlignment {
-    enum MidIcons: AlignmentID {
-        static func defaultValue(in d: ViewDimensions) -> CGFloat {
-            d[.leading]
-        }
-    }
-
-    static let midIcons = HorizontalAlignment(MidIcons.self)
-}
-
-extension AnyView: Identifiable {
-    public var id: UUID {
-        UUID()
     }
 }

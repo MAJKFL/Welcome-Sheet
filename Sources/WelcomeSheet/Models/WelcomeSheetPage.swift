@@ -7,17 +7,10 @@
 
 import SwiftUI
 
-/// A type that describes welcome sheet page's content.
+/// Describes Welcome Sheet page's content.
 public struct WelcomeSheetPage: Identifiable, Decodable {
     private enum CodingKeys : String, CodingKey {
-        case title
-        case rows
-        case mainButtonTitle
-        case accentColor
-        case backgroundColor
-        case isShowingOptionalButton
-        case optionalButtonTitle
-        case optionalButtonURL
+        case title, rows, mainButtonTitle, accentColor, backgroundColor, isShowingOptionalButton, optionalButtonTitle, optionalButtonURL
     }
     
     public var id = UUID()
@@ -25,31 +18,33 @@ public struct WelcomeSheetPage: Identifiable, Decodable {
     
     /// Large title displayed on the top.
     public var title: String
-    /// Rows of content inside a body.
+    /// Rows of content inside body.
     public var rows: [WelcomeSheetPageRow]
     
     
-    /// Title for a main button. Set to "Continue" by default.
+    /// Title for the main button. Set to `"Continue"` by default.
     public var mainButtonTitle: String
-    /// Color used for buttons. When set to nil, uses default accent colour.
+    /// Color used for main buttons. When `nil`, uses default accent color.
     public var accentColor: Color?
-    /// Sheet's background color.
+    /// Background color. When `nil`, uses default system background.
     public var backgroundColor: Color?
     
     
-    /// Specifies whether to show optional button.
+    /// Specifies whether to show the optional button.
     public var isShowingOptionalButton = false
     /// Optional button title.
     public var optionalButtonTitle: String?
-    /// URL to open when optional button is tapped.
+    /// URL to open after optional button is tapped.
     public var optionalButtonURL: URL?
-    /// Clousure executed when optional button is tapped.
+    /// Clousure executed after optional button is tapped.
     public var optionalButtonAction: (() -> ())?
     /// View shown after optional button is tapped.
-    public var optionalButtonView: AnyView?
+    public var optionalButtonView: AnyView? // FIXME: Add support for UIView
     
     
-    /// Creates welcome sheet page.
+    // V SwiftUI Initializers V
+    
+    /// Creates Welcome Sheet page.
     public init(title: String, rows: [WelcomeSheetPageRow], accentColor: Color? = nil, backgroundColor: Color? = nil, mainButtonTitle: String? = nil, optionalButtonTitle: String? = nil, optionalButtonURL: URL? = nil, optionalButtonAction: (() -> ())? = nil) {
         self.title = title
         self.rows = rows
@@ -62,7 +57,7 @@ public struct WelcomeSheetPage: Identifiable, Decodable {
         self.optionalButtonAction = optionalButtonAction
     }
     
-    /// Creates welcome sheet page with custom optional button view.
+    /// Creates Welcome Sheet page with custom optional button view.
     public init(title: String, rows: [WelcomeSheetPageRow], accentColor: Color? = nil, backgroundColor: Color? = nil, mainButtonTitle: String? = nil, optionalButtonTitle: String? = nil, optionalButtonURL: URL? = nil, optionalButtonAction: (() -> ())? = nil, optionalButtonView: (() -> some View)? = nil) {
         self.init(title: title, rows: rows, accentColor: accentColor, backgroundColor: backgroundColor, mainButtonTitle: mainButtonTitle, optionalButtonTitle: optionalButtonTitle, optionalButtonURL: optionalButtonURL, optionalButtonAction: optionalButtonAction)
         
@@ -70,6 +65,23 @@ public struct WelcomeSheetPage: Identifiable, Decodable {
             self.optionalButtonView = AnyView(optionalButtonView())
         }
     }
+    
+    // V UIKit initializer V
+    
+    /// Creates Welcome Sheet page.
+    public init(title: String, rows: [WelcomeSheetPageRow], accentColor: UIColor? = nil, backgroundColor: UIColor? = nil, mainButtonTitle: String? = nil, optionalButtonTitle: String? = nil, optionalButtonURL: URL? = nil, optionalButtonAction: (() -> ())? = nil, optionalButtonView: UIView) {
+        var accent: Color?
+        var background: Color?
+        
+        if let accentColor { accent = Color(accentColor) }
+        if let backgroundColor { background = Color(backgroundColor) }
+        
+        self.init(title: title, rows: rows, accentColor: accent, backgroundColor: background, mainButtonTitle: mainButtonTitle, optionalButtonTitle: optionalButtonTitle, optionalButtonURL: optionalButtonURL, optionalButtonAction: optionalButtonAction)
+        
+        // FIXME: Add support for UIView
+    }
+    
+    // V Codable initializer V
     
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
