@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B5F33812976F17C00E957C1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D757A23628EEB0CD00056497 /* ViewController.swift */; };
+		7B5F33832976F19100E957C1 /* WelcomeSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 7B5F33822976F19100E957C1 /* WelcomeSheet */; };
 		D757A23328EEB0CD00056497 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D757A23228EEB0CD00056497 /* AppDelegate.swift */; };
 		D757A23528EEB0CD00056497 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D757A23428EEB0CD00056497 /* SceneDelegate.swift */; };
-		D757A23728EEB0CD00056497 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D757A23628EEB0CD00056497 /* ViewController.swift */; };
 		D757A23A28EEB0CD00056497 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D757A23828EEB0CD00056497 /* Main.storyboard */; };
 		D757A23C28EEB0CE00056497 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D757A23B28EEB0CE00056497 /* Assets.xcassets */; };
 		D757A23F28EEB0CE00056497 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D757A23D28EEB0CE00056497 /* LaunchScreen.storyboard */; };
@@ -33,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B5F33832976F19100E957C1 /* WelcomeSheet in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +106,7 @@
 			);
 			name = "UIKit-WelcomeSheetDemo";
 			packageProductDependencies = (
+				7B5F33822976F19100E957C1 /* WelcomeSheet */,
 			);
 			productName = "UIKit-WelcomeSheetDemo";
 			productReference = D757A22F28EEB0CD00056497 /* UIKit-WelcomeSheetDemo.app */;
@@ -160,7 +163,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D757A23728EEB0CD00056497 /* ViewController.swift in Sources */,
+				7B5F33812976F17C00E957C1 /* ViewController.swift in Sources */,
 				D757A23328EEB0CD00056497 /* AppDelegate.swift in Sources */,
 				D757A23528EEB0CD00056497 /* SceneDelegate.swift in Sources */,
 			);
@@ -380,6 +383,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7B5F33822976F19100E957C1 /* WelcomeSheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = WelcomeSheet;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D757A22728EEB0CC00056497 /* Project object */;
 }
