@@ -39,36 +39,42 @@ public struct WelcomeSheetPageRow: Identifiable, Decodable {
     }
 
     /// Creates Welcome Sheet page row with system image, given title and content. Tints image with specified colour.
-    public init(imageSystemName: String, accentColor: Color? = nil, title: String, content: String) {
+    public init(imageSystemName: String, accentColor: Color, title: String, content: String) {
         self.init(image: Image(systemName: imageSystemName), accentColor: accentColor, title: title, content: content)
     }
 
     /// Creates Welcome Sheet page row with image name, given title and content. Tints image with specified colour.
-    public init(imageNamed: String, accentColor: Color? = nil, title: String, content: String) {
+    public init(imageNamed: String, accentColor: Color, title: String, content: String) {
         self.init(image: Image(imageNamed), accentColor: accentColor, title: title, content: content)
     }
     
     // V UIKit initializers V
     
     /// Creates Welcome Sheet page row with given image, title and content. Tints image with specified colour.
-    public init(image: UIImage, accentColor: UIColor? = nil, title: String, content: String) {
-        var color: Color?
-        if let accentColor { color = Color(accentColor) }
-        self.init(image: Image(uiImage: image), accentColor: color, title: title, content: content)
+    public init(uiImage: UIImage, accentUIColor: UIColor? = nil, title: String, content: String) {
+        self.init(image: Image(uiImage: uiImage), accentColor: accentUIColor?.toColor(), title: title, content: content)
     }
     
     /// Creates Welcome Sheet page row with system image, given title and content. Tints image with specified colour.
-    public init(imageSystemName: String, accentColor: UIColor? = nil, title: String, content: String) {
-        var color: Color?
-        if let accentColor { color = Color(accentColor) }
-        self.init(image: Image(systemName: imageSystemName), accentColor: color, title: title, content: content)
+    public init(imageSystemName: String, accentUIColor: UIColor, title: String, content: String) {
+        self.init(image: Image(systemName: imageSystemName), accentColor: accentUIColor.toColor(), title: title, content: content)
     }
 
     /// Creates Welcome Sheet page row with image name, given title and content. Tints image with specified colour.
-    public init(imageNamed: String, accentColor: UIColor? = nil, title: String, content: String) {
-        var color: Color?
-        if let accentColor { color = Color(accentColor) }
-        self.init(image: Image(imageNamed), accentColor: color, title: title, content: content)
+    public init(imageNamed: String, accentUIColor: UIColor, title: String, content: String) {
+        self.init(image: Image(imageNamed), accentColor: accentUIColor.toColor(), title: title, content: content)
+    }
+    
+    // V Universal initializers V
+    
+    /// Creates Welcome Sheet page row with system image, given title and content. Tints image with specified colour.
+    public init(imageSystemName: String, title: String, content: String) {
+        self.init(image: Image(systemName: imageSystemName), title: title, content: content)
+    }
+
+    /// Creates Welcome Sheet page row with image name, given title and content. Tints image with specified colour.
+    public init(imageNamed: String, title: String, content: String) {
+        self.init(image: Image(imageNamed), title: title, content: content)
     }
     
     // V Codable initializer V

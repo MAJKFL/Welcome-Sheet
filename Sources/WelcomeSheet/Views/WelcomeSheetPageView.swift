@@ -17,11 +17,6 @@ struct WelcomeSheetPageView: View {
     @State private var optionalView: AnyView?
     
     var body: some View {
-        content
-            .edgesIgnoringSafeArea(.top)
-    }
-    
-    var content: some View {
         VStack(spacing: 0) {
             ScrollView {
                 VStack(spacing: iPhoneDimensions.spacing) {
@@ -148,12 +143,12 @@ struct WelcomeSheetPageView: View {
             .padding(.horizontal, 15 + iPhoneDimensions.horizontalPaddingAddend)
             .padding(.bottom, 60)
             .sheet(item: $optionalView) { view in
-                view
+                view.edgesIgnoringSafeArea(.all)
             }
         }
         .background(
-            page.backgroundColor
-                .edgesIgnoringSafeArea(.all)
+            page.backgroundColor.edgesIgnoringSafeArea(.all)
         )
+        .edgesIgnoringSafeArea(.top)
     }
 }
