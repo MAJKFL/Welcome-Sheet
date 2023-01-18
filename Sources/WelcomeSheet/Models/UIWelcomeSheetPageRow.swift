@@ -26,6 +26,6 @@ public class UIWelcomeSheetPageRow: NSObject {
     public var accentColor: UIColor?
     
     func welcomeSheetPageRow() -> WelcomeSheetPageRow {
-        WelcomeSheetPageRow(image: image, accentColor: accentColor, title: title, content: content)
+        WelcomeSheetPageRow(uiImage: image, accentUIColor: accentColor, title: title, content: content)
     }
 }
