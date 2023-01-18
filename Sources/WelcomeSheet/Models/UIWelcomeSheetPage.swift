@@ -49,6 +49,6 @@ public class UIWelcomeSheetPage: NSObject {
     public var optionalButtonView: UIView?
     
     func welcomeSheetPage() -> WelcomeSheetPage {
-        WelcomeSheetPage(title: title, rows: rows.map { $0.welcomeSheetPageRow() }, accentColor: accentColor, backgroundColor: backgroundColor, mainButtonTitle: mainButtonTitle, optionalButtonTitle: optionalButtonTitle, optionalButtonURL: URL(string: optionalButtonURL ?? ""), optionalButtonAction: optionalButtonAction, optionalButtonView: optionalButtonView)
+        WelcomeSheetPage(title: title, rows: rows.map { $0.welcomeSheetPageRow() }, accentUIColor: accentColor, backgroundUIColor: backgroundColor, mainButtonTitle: mainButtonTitle, optionalButtonTitle: optionalButtonTitle, optionalButtonURL: URL(string: optionalButtonURL ?? ""), optionalButtonAction: optionalButtonAction, optionalButtonUIView: optionalButtonView)
     }
 }
