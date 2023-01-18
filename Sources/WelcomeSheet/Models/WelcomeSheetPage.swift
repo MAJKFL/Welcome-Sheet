@@ -39,7 +39,7 @@ public struct WelcomeSheetPage: Identifiable, Decodable {
     /// Clousure executed after optional button is tapped.
     public var optionalButtonAction: (() -> ())?
     /// View shown after optional button is tapped.
-    public var optionalButtonView: AnyView? // FIXME: Add support for UIView
+    public var optionalButtonView: AnyView?
     
     
     private init(title: String, rows: [WelcomeSheetPageRow], accentColor: Color? = nil, backgroundColor: Color? = nil, mainButtonTitle: String? = nil, optionalButtonTitle: String? = nil, optionalButtonURL: URL? = nil, optionalButtonAction: (() -> ())? = nil) {
@@ -71,7 +71,9 @@ public struct WelcomeSheetPage: Identifiable, Decodable {
     public init(title: String, rows: [WelcomeSheetPageRow], accentUIColor: UIColor? = nil, backgroundUIColor: UIColor? = nil, mainButtonTitle: String? = nil, optionalButtonTitle: String? = nil, optionalButtonURL: URL? = nil, optionalButtonAction: (() -> ())? = nil, optionalButtonUIView: UIView? = nil) {
         self.init(title: title, rows: rows, accentColor: accentUIColor?.toColor(), backgroundColor: backgroundUIColor?.toColor(), mainButtonTitle: mainButtonTitle, optionalButtonTitle: optionalButtonTitle, optionalButtonURL: optionalButtonURL, optionalButtonAction: optionalButtonAction)
         
-        // FIXME: Add support for UIView
+        if let optionalButtonUIView {
+            self.optionalButtonView = AnyView(OptionalButtonView(uiView: optionalButtonUIView))
+        }
     }
     
     // V Codable initializer V
