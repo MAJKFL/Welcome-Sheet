@@ -8,8 +8,7 @@
 import SwiftUI
 
 /// Describes Welcome Sheet page's content.
-@objc
-public class WelcomeSheetPage: NSObject, Identifiable, Decodable {
+public struct WelcomeSheetPage: Identifiable, Decodable {
     private enum CodingKeys : String, CodingKey {
         case title, rows, mainButtonTitle, accentColor, backgroundColor, isShowingOptionalButton, optionalButtonTitle, optionalButtonURL
     }
@@ -59,7 +58,7 @@ public class WelcomeSheetPage: NSObject, Identifiable, Decodable {
     }
     
     /// Creates Welcome Sheet page with custom optional button view.
-    public convenience init(title: String, rows: [WelcomeSheetPageRow], accentColor: Color? = nil, backgroundColor: Color? = nil, mainButtonTitle: String? = nil, optionalButtonTitle: String? = nil, optionalButtonURL: URL? = nil, optionalButtonAction: (() -> ())? = nil, optionalButtonView: (() -> some View)? = nil) {
+    public init(title: String, rows: [WelcomeSheetPageRow], accentColor: Color? = nil, backgroundColor: Color? = nil, mainButtonTitle: String? = nil, optionalButtonTitle: String? = nil, optionalButtonURL: URL? = nil, optionalButtonAction: (() -> ())? = nil, optionalButtonView: (() -> some View)? = nil) {
         self.init(title: title, rows: rows, accentColor: accentColor, backgroundColor: backgroundColor, mainButtonTitle: mainButtonTitle, optionalButtonTitle: optionalButtonTitle, optionalButtonURL: optionalButtonURL, optionalButtonAction: optionalButtonAction)
         
         if let optionalButtonView {
@@ -70,7 +69,7 @@ public class WelcomeSheetPage: NSObject, Identifiable, Decodable {
     // V UIKit initializer V
     
     /// Creates Welcome Sheet page.
-    public convenience init(title: String, rows: [WelcomeSheetPageRow], accentColor: UIColor? = nil, backgroundColor: UIColor? = nil, mainButtonTitle: String? = nil, optionalButtonTitle: String? = nil, optionalButtonURL: URL? = nil, optionalButtonAction: (() -> ())? = nil, optionalButtonView: UIView) {
+    public init(title: String, rows: [WelcomeSheetPageRow], accentColor: UIColor? = nil, backgroundColor: UIColor? = nil, mainButtonTitle: String? = nil, optionalButtonTitle: String? = nil, optionalButtonURL: URL? = nil, optionalButtonAction: (() -> ())? = nil, optionalButtonView: UIView?) {
         var accent: Color?
         var background: Color?
         
@@ -84,7 +83,7 @@ public class WelcomeSheetPage: NSObject, Identifiable, Decodable {
     
     // V Codable initializer V
     
-    required public init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         title = try container.decode(String.self, forKey: .title)
         rows = try container.decode([WelcomeSheetPageRow].self, forKey: .rows)

@@ -10,55 +10,11 @@ import SwiftUI
 
 @objc
 protocol WelcomeSheetDelegate: AnyObject {
-    func welcomeSheetController(didDismiss welcomeSheetController: UIViewController)
+    @objc
+    optional func welcomeSheetController(didDismiss welcomeSheetController: UIViewController)
     
-    func welcomeSheetController(pages welcomeSheetController: UIViewController) -> [WelcomeSheetPage]
-}
-
-@objc
-public class WelcomeSheetControllerConfigurator: NSObject, WelcomeSheetDelegate {
-    
-    func welcomeSheetController(didDismiss welcomeSheetController: UIViewController) {
-        didDismiss()
-    }
-    
-    func welcomeSheetController(pages welcomeSheetController: UIViewController) -> [WelcomeSheetPage] {
-        [
-            WelcomeSheetPage(title: title, rows: rows.map { $0.rows() })
-        ]
-    }
-    
-    
-    @IBInspectable
-    var title: String = ""
-    
-    @IBOutlet
-    var rows: [WelcomeSheetControllerConfiguratorPageRow] = []
-    
-    @IBAction
-    func didDismiss() {
-        
-    }
-    
-    
-}
-
-@objc
-public class WelcomeSheetControllerConfiguratorPageRow: NSObject {
-    
-    @IBInspectable
-    public var title: String = ""
-    
-    @IBInspectable
-    public var content: String = ""
-    
-    @IBInspectable
-    public var image: UIImage = UIImage()
-    
-    func rows() -> WelcomeSheetPageRow {
-        WelcomeSheetPageRow(image: Image(uiImage: image), title: title, content: content)
-    }
-    
+    @objc
+    optional func welcomeSheetController(pages welcomeSheetController: UIViewController) -> [UIWelcomeSheetPage]
 }
 
 public class WelcomeSheetController: ModalWelcomeSheetUIHostingController {
@@ -66,28 +22,25 @@ public class WelcomeSheetController: ModalWelcomeSheetUIHostingController {
     @IBOutlet weak var delegate: WelcomeSheetDelegate?
     
     /// Pages of the sheet.
-    public var pages = [WelcomeSheetPage]() {
+    @IBOutlet
+    public var pages: [UIWelcomeSheetPage] = [] {
         didSet {
-            rootView.pages = pages
-        }
-    }
-    
-    /// Action performed after dismissing the sheet.
-    override public var onDismiss: () -> Void {
-        didSet {
-            rootView.onDismiss = getOnDismiss(with: onDismiss)
+            rootView.pages = pages.map { $0.welcomeSheetPage() }
         }
     }
     
     /// Creates Welcome Sheet controller without pages and onDismiss action.
     public init() {
         super.init(rootView: WelcomeSheetView(pages: [], onDismiss: {}))
+        rootView.onDismiss = didDismiss
     }
     
     /// Creates Welcome Sheet controller with given pages and onDismiss action.
-    public init(pages: [WelcomeSheetPage], isSlideToDismissDisabled: Bool = false, onDismiss: @escaping () -> Void = {}) {
-        super.init(rootView: WelcomeSheetView(pages: pages, onDismiss: onDismiss))
-
+    public init(pages: [UIWelcomeSheetPage], isSlideToDismissDisabled: Bool = false, onDismiss: @escaping () -> Void = {}) {
+        super.init(rootView: WelcomeSheetView(pages: pages.map { $0.welcomeSheetPage() }, onDismiss: {}))
+        self.onDismiss = onDismiss
+        rootView.onDismiss = didDismiss
+        
         self.pages = pages
         self.isModalInPresentation = isSlideToDismissDisabled
     }
@@ -97,9 +50,15 @@ public class WelcomeSheetController: ModalWelcomeSheetUIHostingController {
     }
     
     public override func viewDidLoad() {
-        if let delegate {
-            self.onDismiss = { delegate.welcomeSheetController(didDismiss: self) }
-            self.pages = delegate.welcomeSheetController(pages: self)
+        if let pages = delegate?.welcomeSheetController?(pages: self) {
+            self.pages = pages
+        } else {
+            rootView.pages = pages.map { $0.welcomeSheetPage() }
         }
+    }
+    
+    func didDismiss() {
+        delegate?.welcomeSheetController?(didDismiss: self)
+        self.onDismiss()
     }
 }

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
-        <capability name="Image references" minToolsVersion="12.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -21,9 +20,6 @@
                                 <rect key="frame" x="140" y="408.66666666666669" width="113" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Show sheet"/>
-                                <connections>
-                                    <segue destination="cTk-TA-skH" kind="show" id="MVb-ra-HzO"/>
-                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -33,61 +29,16 @@
                             <constraint firstItem="cQc-3d-P2P" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="RKp-Ce-Uly"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="showSheetButton" destination="cQc-3d-P2P" id="VW8-zl-tL4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="21" y="4"/>
         </scene>
-        <!--Welcome Sheet Controller-->
-        <scene sceneID="7g8-Ss-np9">
-            <objects>
-                <viewController id="cTk-TA-skH" customClass="WelcomeSheetController" customModule="WelcomeSheet" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="rB7-hj-cko">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="8MD-c0-i6a"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="WNW-JA-z8N"/>
-                    <connections>
-                        <outlet property="delegate" destination="num-LI-p0r" id="UdE-tm-eTe"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="EwW-0b-f30" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <customObject id="num-LI-p0r" customClass="WelcomeSheetControllerConfigurator" customModule="WelcomeSheet">
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="Welcome to UIKit"/>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <outletCollection property="rows" destination="jhd-aO-yAH" collectionClass="NSMutableArray" id="qaW-He-ANM"/>
-                        <outletCollection property="rows" destination="lhS-Z6-jtH" collectionClass="NSMutableArray" id="6Kc-ey-01j"/>
-                    </connections>
-                </customObject>
-                <customObject id="jhd-aO-yAH" customClass="WelcomeSheetControllerConfiguratorPageRow" customModule="WelcomeSheet">
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="image" keyPath="image">
-                            <imageReference key="value" image="square.and.arrow.up" catalog="system" symbolScale="large"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="Share"/>
-                        <userDefinedRuntimeAttribute type="string" keyPath="content" value="You can now share like never before"/>
-                    </userDefinedRuntimeAttributes>
-                </customObject>
-                <customObject id="lhS-Z6-jtH" customClass="WelcomeSheetControllerConfiguratorPageRow" customModule="WelcomeSheet">
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="image" keyPath="image">
-                            <imageReference key="value" image="square.and.arrow.down" catalog="system" symbolScale="large"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="Save"/>
-                        <userDefinedRuntimeAttribute type="string" keyPath="content" value="Better save before you lose your data"/>
-                    </userDefinedRuntimeAttributes>
-                </customObject>
-            </objects>
-            <point key="canvasLocation" x="865" y="-61"/>
-        </scene>
     </scenes>
     <resources>
-        <image name="square.and.arrow.down" catalog="system" width="121" height="128"/>
-        <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
