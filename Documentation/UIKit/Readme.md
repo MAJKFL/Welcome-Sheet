@@ -35,13 +35,13 @@ Drag out a new UIViewController and set the class to `WelcomeSheetController`.
 
 <img alt="Configure the attributes of a page row" src="Resources/ConfigureRow.png" width="300px"/>
 
-- Go to the *Outlets* tab of your *page* and connect the `rows` outlet collection to all of the rows for the page.
+- Go to the *Connections* tab of your *page* and connect the `rows` outlet collection to all of the rows for the page.
 
 <img alt="Connect the rows for your page" src="Resources/ConnectRows.png" width="300px"/>
 
 ### Connecting a page to the controller
 
-- On your controller, go to the *Outlets* tab and make a connection for each of your pages.  
+- On your controller, go to the *Connections* tab and make a connection for each of your pages.  
 
 <img alt="Connect the pages for your welcome sheet" src="Resources/ConnectPages.png" width="300px"/>
 
