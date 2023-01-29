@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B01CE742986A9B40044CE1E /* WelcomeSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 7B01CE732986A9B40044CE1E /* WelcomeSheet */; };
 		D757A23328EEB0CD00056497 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D757A23228EEB0CD00056497 /* AppDelegate.swift */; };
 		D757A23528EEB0CD00056497 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D757A23428EEB0CD00056497 /* SceneDelegate.swift */; };
 		D757A23728EEB0CD00056497 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D757A23628EEB0CD00056497 /* ViewController.swift */; };
@@ -33,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B01CE742986A9B40044CE1E /* WelcomeSheet in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +106,7 @@
 			);
 			name = "UIKit-WelcomeSheetDemo";
 			packageProductDependencies = (
+				7B01CE732986A9B40044CE1E /* WelcomeSheet */,
 			);
 			productName = "UIKit-WelcomeSheetDemo";
 			productReference = D757A22F28EEB0CD00056497 /* UIKit-WelcomeSheetDemo.app */;
@@ -380,6 +383,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7B01CE732986A9B40044CE1E /* WelcomeSheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = WelcomeSheet;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D757A22728EEB0CC00056497 /* Project object */;
 }

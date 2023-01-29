@@ -1,31 +1,17 @@
 //
 //  WelcomeSheetController.swift
-//
+//  
 //
 //  Created by Kevin Romero Peces-Barba on 2/10/22.
 //
 
 import UIKit
-import SwiftUI
-
-@objc
-public protocol WelcomeSheetDelegate: AnyObject {
-    @objc
-    optional func welcomeSheetController(didDismiss welcomeSheetController: UIViewController)
-    
-    @objc
-    optional func welcomeSheetController(pages welcomeSheetController: UIViewController) -> [UIWelcomeSheetPage]
-}
 
 open class WelcomeSheetController: ModalWelcomeSheetUIHostingController {
-    
-    @IBOutlet weak public var delegate: WelcomeSheetDelegate?
-    
     /// Pages of the sheet.
-    @IBOutlet
-    public var pages: [UIWelcomeSheetPage] = [] {
+    public var pages: [WelcomeSheetPage] = [] {
         didSet {
-            rootView.pages = pages.map { $0.welcomeSheetPage() }
+            rootView.pages = pages
         }
     }
     
@@ -36,8 +22,8 @@ open class WelcomeSheetController: ModalWelcomeSheetUIHostingController {
     }
     
     /// Creates Welcome Sheet controller with given pages and onDismiss action.
-    public init(pages: [UIWelcomeSheetPage], isSlideToDismissDisabled: Bool = false, onDismiss: @escaping () -> Void = {}) {
-        super.init(rootView: WelcomeSheetView(pages: pages.map { $0.welcomeSheetPage() }, onDismiss: {}))
+    public init(pages: [WelcomeSheetPage], isSlideToDismissDisabled: Bool = false, onDismiss: @escaping () -> Void = {}) {
+        super.init(rootView: WelcomeSheetView(pages: pages, onDismiss: {}))
         self.onDismiss = onDismiss
         rootView.onDismiss = getOnDismiss(with: didDismiss)
         
@@ -50,16 +36,7 @@ open class WelcomeSheetController: ModalWelcomeSheetUIHostingController {
         rootView.onDismiss = getOnDismiss(with: didDismiss)
     }
     
-    public override func viewDidLoad() {
-        if let pages = delegate?.welcomeSheetController?(pages: self) {
-            self.pages = pages
-        } else {
-            rootView.pages = pages.map { $0.welcomeSheetPage() }
-        }
-    }
-    
     open func didDismiss() {
-        delegate?.welcomeSheetController?(didDismiss: self)
         self.onDismiss()
     }
 }

@@ -42,7 +42,7 @@ public struct WelcomeSheetPage: Identifiable, Decodable {
     public var optionalButtonView: AnyView?
     
     
-    private init(title: String, rows: [WelcomeSheetPageRow], accentColor: Color? = nil, backgroundColor: Color? = nil, mainButtonTitle: String? = nil, optionalButtonTitle: String? = nil, optionalButtonURL: URL? = nil, optionalButtonAction: (() -> ())? = nil) {
+    private init(title: String, rows: [WelcomeSheetPageRow], accentColor: Color? = nil, backgroundColor: Color? = nil, mainButtonTitle: String? = nil, optionalButtonTitle: String? = nil, optionalButtonURL: URL? = nil, optionalButtonAction: (() -> ())? = nil, optionalButtonView: AnyView? = nil) {
         self.title = title
         self.rows = rows
         self.mainButtonTitle = mainButtonTitle ?? "Continue"
@@ -52,28 +52,46 @@ public struct WelcomeSheetPage: Identifiable, Decodable {
         self.optionalButtonTitle = optionalButtonTitle
         self.optionalButtonURL = optionalButtonURL
         self.optionalButtonAction = optionalButtonAction
+        self.optionalButtonView = optionalButtonView
+    }
+    
+    /// Creates Welcome Sheet page.
+    public init(title: String, rows: [WelcomeSheetPageRow], mainButtonTitle: String? = nil, optionalButtonTitle: String? = nil, optionalButtonURL: URL? = nil, optionalButtonAction: (() -> ())? = nil, optionalButtonUIView: UIView? = nil) {
+        self.init(title: title, rows: rows, accentColor: nil, backgroundColor: nil, mainButtonTitle: mainButtonTitle, optionalButtonTitle: optionalButtonTitle, optionalButtonURL: optionalButtonURL, optionalButtonAction: optionalButtonAction, optionalButtonView: Self.getAnyViewFrom(uiVIew: optionalButtonUIView))
     }
     
     // V SwiftUI Initializers V
     
     /// Creates Welcome Sheet page.
-    public init(title: String, rows: [WelcomeSheetPageRow], accentColor: Color? = nil, backgroundColor: Color? = nil, mainButtonTitle: String? = nil, optionalButtonTitle: String? = nil, optionalButtonURL: URL? = nil, optionalButtonAction: (() -> ())? = nil, optionalButtonView: (() -> some View)? = nil) {
-        self.init(title: title, rows: rows, accentColor: accentColor, backgroundColor: backgroundColor, mainButtonTitle: mainButtonTitle, optionalButtonTitle: optionalButtonTitle, optionalButtonURL: optionalButtonURL, optionalButtonAction: optionalButtonAction)
-        
-        if let optionalButtonView {
-            self.optionalButtonView = AnyView(optionalButtonView())
-        }
+    public init(title: String, rows: [WelcomeSheetPageRow], accentColor: Color?, backgroundColor: Color?, mainButtonTitle: String? = nil, optionalButtonTitle: String? = nil, optionalButtonURL: URL? = nil, optionalButtonAction: (() -> ())? = nil, optionalButtonView: (() -> any View)? = nil) {
+        self.init(title: title, rows: rows, accentColor: accentColor, backgroundColor: backgroundColor, mainButtonTitle: mainButtonTitle, optionalButtonTitle: optionalButtonTitle, optionalButtonURL: optionalButtonURL, optionalButtonAction: optionalButtonAction, optionalButtonView: Self.getAnyViewFrom(view: optionalButtonView))
+    }
+    
+    /// Creates Welcome Sheet page.
+    public init(title: String, rows: [WelcomeSheetPageRow], accentColor: Color?, mainButtonTitle: String? = nil, optionalButtonTitle: String? = nil, optionalButtonURL: URL? = nil, optionalButtonAction: (() -> ())? = nil, optionalButtonView: (() -> any View)? = nil) {
+        self.init(title: title, rows: rows, accentColor: accentColor, backgroundColor: nil, mainButtonTitle: mainButtonTitle, optionalButtonTitle: optionalButtonTitle, optionalButtonURL: optionalButtonURL, optionalButtonAction: optionalButtonAction, optionalButtonView: Self.getAnyViewFrom(view: optionalButtonView))
+    }
+    
+    /// Creates Welcome Sheet page.
+    public init(title: String, rows: [WelcomeSheetPageRow], backgroundColor: Color?, mainButtonTitle: String? = nil, optionalButtonTitle: String? = nil, optionalButtonURL: URL? = nil, optionalButtonAction: (() -> ())? = nil, optionalButtonView: (() -> any View)? = nil) {
+        self.init(title: title, rows: rows, accentColor: nil, backgroundColor: backgroundColor, mainButtonTitle: mainButtonTitle, optionalButtonTitle: optionalButtonTitle, optionalButtonURL: optionalButtonURL, optionalButtonAction: optionalButtonAction, optionalButtonView: Self.getAnyViewFrom(view: optionalButtonView))
     }
     
     // V UIKit initializer V
     
     /// Creates Welcome Sheet page.
-    public init(title: String, rows: [WelcomeSheetPageRow], accentUIColor: UIColor? = nil, backgroundUIColor: UIColor? = nil, mainButtonTitle: String? = nil, optionalButtonTitle: String? = nil, optionalButtonURL: URL? = nil, optionalButtonAction: (() -> ())? = nil, optionalButtonUIView: UIView? = nil) {
-        self.init(title: title, rows: rows, accentColor: accentUIColor?.toColor(), backgroundColor: backgroundUIColor?.toColor(), mainButtonTitle: mainButtonTitle, optionalButtonTitle: optionalButtonTitle, optionalButtonURL: optionalButtonURL, optionalButtonAction: optionalButtonAction)
-        
-        if let optionalButtonUIView {
-            self.optionalButtonView = AnyView(OptionalButtonView(uiView: optionalButtonUIView))
-        }
+    public init(title: String, rows: [WelcomeSheetPageRow], accentUIColor: UIColor?, backgroundUIColor: UIColor?, mainButtonTitle: String? = nil, optionalButtonTitle: String? = nil, optionalButtonURL: URL? = nil, optionalButtonAction: (() -> ())? = nil, optionalButtonUIView: UIView? = nil) {
+        self.init(title: title, rows: rows, accentColor: accentUIColor?.toColor(), backgroundColor: backgroundUIColor?.toColor(), mainButtonTitle: mainButtonTitle, optionalButtonTitle: optionalButtonTitle, optionalButtonURL: optionalButtonURL, optionalButtonAction: optionalButtonAction, optionalButtonView: Self.getAnyViewFrom(uiVIew: optionalButtonUIView))
+    }
+    
+    /// Creates Welcome Sheet page.
+    public init(title: String, rows: [WelcomeSheetPageRow], accentUIColor: UIColor?, mainButtonTitle: String? = nil, optionalButtonTitle: String? = nil, optionalButtonURL: URL? = nil, optionalButtonAction: (() -> ())? = nil, optionalButtonUIView: UIView? = nil) {
+        self.init(title: title, rows: rows, accentColor: accentUIColor?.toColor(), backgroundColor: nil, mainButtonTitle: mainButtonTitle, optionalButtonTitle: optionalButtonTitle, optionalButtonURL: optionalButtonURL, optionalButtonAction: optionalButtonAction, optionalButtonView: Self.getAnyViewFrom(uiVIew: optionalButtonUIView))
+    }
+    
+    /// Creates Welcome Sheet page.
+    public init(title: String, rows: [WelcomeSheetPageRow], backgroundUIColor: UIColor?, mainButtonTitle: String? = nil, optionalButtonTitle: String? = nil, optionalButtonURL: URL? = nil, optionalButtonAction: (() -> ())? = nil, optionalButtonUIView: UIView? = nil) {
+        self.init(title: title, rows: rows, accentColor: nil, backgroundColor: backgroundUIColor?.toColor(), mainButtonTitle: mainButtonTitle, optionalButtonTitle: optionalButtonTitle, optionalButtonURL: optionalButtonURL, optionalButtonAction: optionalButtonAction, optionalButtonView: Self.getAnyViewFrom(uiVIew: optionalButtonUIView))
     }
     
     // V Codable initializer V
@@ -125,5 +143,17 @@ public struct WelcomeSheetPage: Identifiable, Decodable {
                 isShowingOptionalButton = false
             }
         }
+    }
+}
+
+private extension WelcomeSheetPage {
+    static func getAnyViewFrom(view: (() -> any View)?) -> AnyView? {
+        guard let view else { return nil }
+        return AnyView(view())
+    }
+    
+    static func getAnyViewFrom(uiVIew: UIView?) -> AnyView? {
+        guard let uiVIew else { return nil }
+        return AnyView(OptionalButtonView(uiView: uiVIew))
     }
 }
