@@ -8,10 +8,7 @@
 import SwiftUI
 
 open class ModalWelcomeSheetUIHostingController: UIHostingController<WelcomeSheetView>, UIPopoverPresentationControllerDelegate {
-    var onDismiss: () -> Void
-    
     override internal init(rootView: WelcomeSheetView) {
-        self.onDismiss = rootView.onDismiss
         super.init(rootView: rootView)
         
         self.rootView.onDismiss = getOnDismiss(with: rootView.onDismiss)

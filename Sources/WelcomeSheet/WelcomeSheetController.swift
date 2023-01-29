@@ -15,6 +15,9 @@ open class WelcomeSheetController: ModalWelcomeSheetUIHostingController {
         }
     }
     
+    /// Closure called on dismissal of the sheet.
+    public var onDismiss: (() -> Void)?
+    
     /// Creates Welcome Sheet controller without pages and onDismiss action.
     public init() {
         super.init(rootView: WelcomeSheetView(pages: [], onDismiss: {}))
@@ -37,6 +40,6 @@ open class WelcomeSheetController: ModalWelcomeSheetUIHostingController {
     }
     
     open func didDismiss() {
-        self.onDismiss()
+        self.onDismiss?()
     }
 }
