@@ -2,14 +2,14 @@
 
 ![Welcome Sheet baner](Documentation/WelcomeSheetBanner.png)
 
-Welcome sheet for swiftUI enables incredibly easy way for creating onboarding screens, update notes, or whatever you imagine! The main idea standing behind this project was to follow the design of Apple’s native onboarding screens as much as possible, that’s why you can be always sure they will look gorgeous on iPhone SE screen as well as on iPad Pro’s massive 12,9” display!
+Welcome sheet for iOS enables incredibly easy way for creating onboarding screens, update notes, or whatever you imagine! The main idea standing behind this project was to follow the design of Apple’s native onboarding screens as much as possible, that’s why you can be always sure they will look gorgeous on iPhone SE screen as well as on iPad Pro’s massive 12,9” display!
 
 <p align="center">
     <img src="Documentation/WelcomeSheetPromo.gif">
 </p>
 
-## Usage
-To create a welcome sheet simply add .welcomeSheet view modifier to your view and pass page array as an argument.
+# SwiftUI
+To create a welcome sheet in SwiftUI simply add .welcomeSheet view modifier to your view and pass page array as an argument.
 ```swift
 import SwiftUI
 import WelcomeSheet
@@ -50,13 +50,77 @@ struct ContentView: View {
 .welcomeSheet(isPresented: $showSheet, 
               onDismiss: { /* Run this code when sheet is dismissed */ }, 
               isSlideToDismissDisabled: true, 
+              preferredColorScheme = .dark,
               pages: pages)
 ```
 
 - `isPresented` - `bool` binding. When set to `true` presents sheet.
 - `onDismiss` - Closure called after sheet's dismissal.
 - `isSlideToDismissDisabled` - When set to `true` disables sheet's swipe to dismiss gesture.
-- `pages` - Table of pages to be displayed chronologically.
+- `preferredColorScheme` - Overrides the default color scheme.
+- `pages` - Array of pages to be displayed chronologically.
+
+# UIKit  
+To create a welcome sheet in UIKit create `WelcomeSheetController` and present it from your ViewController.
+
+```Swift
+class ViewController: UIViewController {
+
+    @IBOutlet weak var showSheetButton: UIButton!
+
+    let pages = [
+        WelcomeSheetPage(title: "Welcome to Welcome Sheet", rows: [
+            WelcomeSheetPageRow(imageSystemName: "rectangle.stack.fill.badge.plus",
+                                title: "Quick Creation",
+                                content: "It's incredibly intuitive. Simply declare an array of pages filled with content."),
+            
+            WelcomeSheetPageRow(imageSystemName: "slider.horizontal.3",
+                                title: "Highly Customisable",
+                                content: "Match sheet's appearance to your app, link buttons, perform actions after dismissal."),
+            
+            WelcomeSheetPageRow(imageSystemName: "ipad.and.iphone",
+                                title: "Works out of the box",
+                                content: "Don't worry about various screen sizes. It will look gorgeous on every iOS device.")
+        ])
+    ]
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        showSheetButton.addTarget(self, action: #selector(showSheet), for: .touchUpInside)
+    }
+
+    @objc func showSheet() {
+        let sheetVC = WelcomeSheetController()
+        sheetVC.pages = pages
+        sheetVC.onDismiss = sheetDismissed
+
+        present(sheetVC, animated: true)
+    }
+
+    func sheetDismissed() {
+        print("Sheet dismissed")
+    }
+}
+```
+
+## WelcomeSheetController
+`WelcomeSheetController` controller used to create, configure and present the sheet.
+
+```Swift
+let sheetVC = WelcomeSheetController()
+sheetVC.pages = pages
+sheetVC.onDismiss = { /* Run this code when sheet is dismissed */ }
+sheetVC.isModalInPresentation = true
+
+present(sheetVC, animated: true)
+```
+- `pages` - Array of pages to be displayed chronologically.
+- `onDismiss` - Closure called after sheet's dismissal.
+- `isModalInPresentation` - When set to `true` disables sheet's swipe to dismiss gesture.
+
+# Models
+Objects used to configure sheets. Each model has also a set of UIKit data initializers.
 
 ## WelcomeSheetPage
 
@@ -66,8 +130,8 @@ struct ContentView: View {
 WelcomeSheetPage(title: "Welcome to Welcome Sheet", rows: [
     // Rows
 ],
-accentColor: Color.purple, 
 mainButtonTitle: "Let's go!",
+accentColor: Color.purple, 
 optionalButtonTitle: "About Welcome Sheet...", 
 optionalButtonURL: URL(string: "https://github.com/MAJKFL/Welcome-Sheet"))
 ```
