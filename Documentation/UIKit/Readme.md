@@ -2,12 +2,12 @@
 
 You can set up the pages of your Welcome Sheet from a Storyboard or XIB file—without writing a single line of code. Check out the [demo](../../Demo/UIKit-Storyboard-WelcomeSheetDemo/) for more details.
 
-## Creating a WelcomeSheetController
+## Creating a WelcomeSheetStoryboardController
 
-Drag out a new UIViewController and set the class to `WelcomeSheetController`.
+Drag out a new UIViewController and set the class to `WelcomeSheetStoryboardController`.
 <div style="display: flex; align-items: center">
     <img alt="A new UIViewController" src="Resources/ViewController.png" width="300px"/>
-    <img alt="Set class of the controller to WelcomeSheetController" src="Resources/SetClassOfViewController.png" width="300px"/>
+    <img alt="Set class of the controller to WelcomeSheetStoryboardController" src="Resources/SetClassOfViewController.png" width="300px"/>
 </div>
 
 ## Creating a page
@@ -49,7 +49,7 @@ Drag out a new UIViewController and set the class to `WelcomeSheetController`.
 
 To configure your Welcome sheet from a storyboard do as follows:
 
-- Drag out a new UIViewController and set the class to `WelcomeSheetController`.  
+- Drag out a new UIViewController and set the class to `WelcomeSheetStoryboardController`.  
 - For each of your pages:
     - Drag out a new Object and set the class to `UIWelcomeSheetPage`.
     - Configure the attributes
@@ -63,3 +63,7 @@ To configure your Welcome sheet from a storyboard do as follows:
 You should end up with a lot of objects like so:
 
 <img alt="Objects connected to your sheet" src="Resources/WelcomeSheetScene.png" width="300px"/>
+
+# Using a System Symbol in a UIImage
+
+Due to conversion issues between `UIImage` and SwiftUI’s `Image`, system symbols will have a squashed appearance. Welcome Sheet overcomes this issue by obtaining the name of the system symbol from the `UIImage` and creating a new `Image` from the system name.

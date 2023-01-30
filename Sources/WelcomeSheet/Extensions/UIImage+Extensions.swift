@@ -26,6 +26,7 @@ extension UIImage {
             
             let assetManagerName = assetManager.value(forKey: "_assetManagerName") as? String
         else {
+            assertionFailure("assetName or assetManagerName is not available.")
             return nil
         }
         
