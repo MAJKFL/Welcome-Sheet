@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="UIKit_Storyboard_WelcomeSheetDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aZk-kz-NN5">
+                                <rect key="frame" x="140" y="421" width="113" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Show sheet"/>
+                                <connections>
+                                    <segue destination="wSc-U9-mbO" kind="show" id="Dav-6d-i9Z"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="aZk-kz-NN5" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Ntg-ty-FqX"/>
+                            <constraint firstItem="aZk-kz-NN5" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="laf-ey-900"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-474" y="-9"/>
+        </scene>
+        <!--Welcome Sheet Storyboard Controller-->
+        <scene sceneID="g5V-Rl-cAY">
+            <objects>
+                <viewController id="wSc-U9-mbO" customClass="WelcomeSheetStoryboardController" customModule="WelcomeSheet" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hYR-T5-H5T">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="wpQ-6y-NkU"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="cz2-V1-5ZD"/>
+                    <connections>
+                        <outletCollection property="pages" destination="w5l-MJ-fFT" collectionClass="NSMutableArray" id="0BP-Vc-Kh4"/>
+                        <outletCollection property="pages" destination="xQK-Qv-ynw" collectionClass="NSMutableArray" id="wih-KP-Fyu"/>
+                        <outletCollection property="pages" destination="3P9-yZ-Obt" collectionClass="NSMutableArray" id="oQJ-qQ-t2D"/>
+                        <outletCollection property="pages" destination="uEx-Tk-d3j" collectionClass="NSMutableArray" id="b5e-J6-3qd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qfn-oK-HbK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <customObject id="w5l-MJ-fFT" customClass="UIWelcomeSheetPage" customModule="WelcomeSheet">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="Welcome to Welcome Sheet"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="accentColor">
+                            <color key="value" systemColor="systemPurpleColor"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="string" keyPath="optionalButtonTitle" value="About Welcome Sheet..."/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="optionalButtonURL" value="https://github.com/MAJKFL/Welcome-Sheet"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <outletCollection property="rows" destination="VMc-pg-0aM" collectionClass="NSMutableArray" id="CTb-UH-6aO"/>
+                        <outletCollection property="rows" destination="Mx5-HU-xig" collectionClass="NSMutableArray" id="lb8-Hd-qbT"/>
+                        <outletCollection property="rows" destination="gqg-iL-fVk" collectionClass="NSMutableArray" id="fon-1L-hpS"/>
+                    </connections>
+                </customObject>
+                <customObject id="VMc-pg-0aM" customClass="UIWelcomeSheetPageRow" customModule="WelcomeSheet">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="accentColor">
+                            <color key="value" systemColor="systemMintColor"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="Quick Creation"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="content" value="It's incredibly intuitive. Simply declare an array of pages filled with content."/>
+                        <userDefinedRuntimeAttribute type="image" keyPath="image">
+                            <imageReference key="value" image="rectangle.stack.fill.badge.plus" catalog="system" symbolScale="default"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </customObject>
+                <customObject id="Mx5-HU-xig" customClass="UIWelcomeSheetPageRow" customModule="WelcomeSheet">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="accentColor">
+                            <color key="value" systemColor="systemIndigoColor"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="Highly Customisable"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="content" value="Match sheet's appearance to your app, link buttons, perform actions after dismissal."/>
+                        <userDefinedRuntimeAttribute type="image" keyPath="image" value="gears"/>
+                    </userDefinedRuntimeAttributes>
+                </customObject>
+                <customObject id="gqg-iL-fVk" customClass="UIWelcomeSheetPageRow" customModule="WelcomeSheet">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="accentColor">
+                            <color key="value" systemColor="systemGreenColor"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="Works out of the box"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="content" value="Don't worry about various screen sizes. It will look gorgeous on every iOS device."/>
+                        <userDefinedRuntimeAttribute type="image" keyPath="image">
+                            <imageReference key="value" image="ipad.and.iphone" catalog="system" symbolScale="default"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </customObject>
+                <customObject id="xQK-Qv-ynw" customClass="UIWelcomeSheetPage" customModule="WelcomeSheet">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="What's New in Translate"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="mainButtonTitle" value="Wassup?"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <outletCollection property="rows" destination="eek-ZA-X6h" collectionClass="NSMutableArray" id="dq5-Yd-e2h"/>
+                        <outletCollection property="rows" destination="7JK-8p-Gwq" collectionClass="NSMutableArray" id="4eo-Qu-hGd"/>
+                        <outletCollection property="rows" destination="7ec-m2-wg8" collectionClass="NSMutableArray" id="DIf-A6-g1m"/>
+                    </connections>
+                </customObject>
+                <customObject id="eek-ZA-X6h" customClass="UIWelcomeSheetPageRow" customModule="WelcomeSheet">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="image" keyPath="image">
+                            <imageReference key="value" image="platter.2.filled.iphone" catalog="system" symbolScale="default"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="string" keyPath="content" value="Choose a side-by-side or face-to-face conversation view."/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="Conversation Views"/>
+                    </userDefinedRuntimeAttributes>
+                </customObject>
+                <customObject id="7JK-8p-Gwq" customClass="UIWelcomeSheetPageRow" customModule="WelcomeSheet">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="image" keyPath="image">
+                            <imageReference key="value" image="mic.badge.plus" catalog="system" symbolScale="default"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="string" keyPath="content" value="Respond in conversations without tapping the microphone button."/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="Auto Translate"/>
+                    </userDefinedRuntimeAttributes>
+                </customObject>
+                <customObject id="7ec-m2-wg8" customClass="UIWelcomeSheetPageRow" customModule="WelcomeSheet">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="image" keyPath="image">
+                            <imageReference key="value" image="iphone" catalog="system" symbolScale="default"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="string" keyPath="content" value="Translate selected text anywhere on your iPhone."/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="System-Wide Translation"/>
+                    </userDefinedRuntimeAttributes>
+                </customObject>
+                <customObject id="3P9-yZ-Obt" customClass="UIWelcomeSheetPage" customModule="WelcomeSheet">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="Welcome to Reminders"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="accentColor">
+                            <color key="value" systemColor="systemBlueColor"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <outletCollection property="rows" destination="Qtg-f6-rtp" collectionClass="NSMutableArray" id="xFY-ou-4Pj"/>
+                        <outletCollection property="rows" destination="SnT-cV-GNR" collectionClass="NSMutableArray" id="gZ2-sN-rYi"/>
+                        <outletCollection property="rows" destination="3ku-ur-HfQ" collectionClass="NSMutableArray" id="wIs-4M-kk9"/>
+                    </connections>
+                </customObject>
+                <customObject id="Qtg-f6-rtp" customClass="UIWelcomeSheetPageRow" customModule="WelcomeSheet">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="accentColor">
+                            <color key="value" systemColor="systemGreenColor"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="Quick Creation"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="content" value="Simply type, ask Siri, or use the quick toolbar to create reminders."/>
+                        <userDefinedRuntimeAttribute type="image" keyPath="image">
+                            <imageReference key="value" image="note.text.badge.plus" catalog="system" symbolScale="default"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </customObject>
+                <customObject id="SnT-cV-GNR" customClass="UIWelcomeSheetPageRow" customModule="WelcomeSheet">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="accentColor">
+                            <color key="value" red="0.0" green="0.69803921568627447" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="Easy Organizing"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="content">
+                            <string key="value">Create lists to match your needs and categorize reminders with tags. Collaborate with others by sharing lists and assigning individual tasks.</string>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="image" keyPath="image">
+                            <imageReference key="value" image="rectangle.grid.2x2.fill" catalog="system" symbolScale="default"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </customObject>
+                <customObject id="3ku-ur-HfQ" customClass="UIWelcomeSheetPageRow" customModule="WelcomeSheet">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="accentColor">
+                            <color key="value" systemColor="systemOrangeColor"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="Suggestions and Smart Lists"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="content" value="Suggestions help you organize quickly, and smart lists automatically group reminders."/>
+                        <userDefinedRuntimeAttribute type="image" keyPath="image">
+                            <imageReference key="value" image="lightbulb.fill" catalog="system" symbolScale="default"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </customObject>
+                <customObject id="uEx-Tk-d3j" customClass="UIWelcomeSheetPage" customModule="WelcomeSheet">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="What’s New in Maps"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="accentColor">
+                            <color key="value" systemColor="systemPinkColor"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="string" keyPath="mainButtonTitle" value="Let’s go!"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="optionalButtonTitle" value="About Apple Maps &amp; Privacy..."/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="optionalButtonURL" value="https://apple.com"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <outletCollection property="rows" destination="2eI-i6-v16" collectionClass="NSMutableArray" id="93Q-Dr-Yuo"/>
+                        <outletCollection property="rows" destination="dng-gJ-e0k" collectionClass="NSMutableArray" id="1am-C6-DGO"/>
+                        <outletCollection property="rows" destination="7Zk-Z4-udS" collectionClass="NSMutableArray" id="ePo-mI-6eN"/>
+                    </connections>
+                </customObject>
+                <customObject id="2eI-i6-v16" customClass="UIWelcomeSheetPageRow" customModule="WelcomeSheet">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="accentColor">
+                            <color key="value" systemColor="systemGreenColor"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="Updated Map Style"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="content" value="An improved design makes it easier to navigate and explore the map."/>
+                        <userDefinedRuntimeAttribute type="image" keyPath="image">
+                            <imageReference key="value" image="map.fill" catalog="system" symbolScale="default"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </customObject>
+                <customObject id="dng-gJ-e0k" customClass="UIWelcomeSheetPageRow" customModule="WelcomeSheet">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="accentColor">
+                            <color key="value" systemColor="systemRedColor"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="All-New Place Cards"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="content" value="Completely redesigned place cards make it easier to learn about and interact with places."/>
+                        <userDefinedRuntimeAttribute type="image" keyPath="image">
+                            <imageReference key="value" image="mappin.and.ellipse" catalog="system" symbolScale="default"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </customObject>
+                <customObject id="7Zk-Z4-udS" customClass="UIWelcomeSheetPageRow" customModule="WelcomeSheet">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="accentColor">
+                            <color key="value" systemColor="systemBlueColor"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="Improved Search"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="content" value="Finding places is now easier with filters and automatic updates when you're browsing results on the map."/>
+                        <userDefinedRuntimeAttribute type="image" keyPath="image">
+                            <imageReference key="value" image="magnifyingglass" catalog="system" symbolScale="default"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </customObject>
+            </objects>
+            <point key="canvasLocation" x="369" y="-9"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="gears" width="512" height="512"/>
+        <image name="ipad.and.iphone" catalog="system" width="128" height="87"/>
+        <image name="iphone" catalog="system" width="112" height="128"/>
+        <image name="lightbulb.fill" catalog="system" width="92" height="128"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="117"/>
+        <image name="map.fill" catalog="system" width="128" height="110"/>
+        <image name="mappin.and.ellipse" catalog="system" width="117" height="128"/>
+        <image name="mic.badge.plus" catalog="system" width="121" height="128"/>
+        <image name="note.text.badge.plus" catalog="system" width="128" height="108"/>
+        <image name="platter.2.filled.iphone" catalog="system" width="114" height="128"/>
+        <image name="rectangle.grid.2x2.fill" catalog="system" width="128" height="97"/>
+        <image name="rectangle.stack.fill.badge.plus" catalog="system" width="128" height="118"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemIndigoColor">
+            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemMintColor">
+            <color red="0.0" green="0.7803921568627451" blue="0.74509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemPurpleColor">
+            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

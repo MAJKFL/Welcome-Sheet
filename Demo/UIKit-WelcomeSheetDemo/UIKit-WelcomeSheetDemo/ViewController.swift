@@ -98,7 +98,9 @@ class ViewController: UIViewController {
     }
 
     @objc func showSheet() {
-        let sheetVC = WelcomeSheetController(pages: self.pages, isSlideToDismissDisabled: true, onDismiss: sheetDismissed)
+        let sheetVC = WelcomeSheetController()
+        sheetVC.pages = pages
+        sheetVC.onDismiss = sheetDismissed
 
         present(sheetVC, animated: true)
     }

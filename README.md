@@ -133,6 +133,13 @@ You can decode pages from JSON.
 
 **Note:** `imageName` can store asset catalogue image name or SF Symbol name.
 
+## UIKit Storyboards support
+You can configure your Welcome Sheet without writing a single line of code.
+
+![Configuring Welcome Sheet from a Storyboard](Documentation/UIKit/Resources/Teaser.png)
+
+For a step-by-step guide on how to configure by storyboards, please see the [Documentation](Documentation/UIKit/Readme.md)
+
 ## Installation
 
 Using Swift Package Manager

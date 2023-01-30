@@ -39,12 +39,12 @@ public struct WelcomeSheetPageRow: Identifiable, Decodable {
     }
 
     /// Creates Welcome Sheet page row with system image, given title and content. Tints image with specified colour.
-    public init(imageSystemName: String, accentColor: Color, title: String, content: String) {
+    public init(imageSystemName: String, accentColor: Color?, title: String, content: String) {
         self.init(image: Image(systemName: imageSystemName), accentColor: accentColor, title: title, content: content)
     }
 
     /// Creates Welcome Sheet page row with image name, given title and content. Tints image with specified colour.
-    public init(imageNamed: String, accentColor: Color, title: String, content: String) {
+    public init(imageNamed: String, accentColor: Color?, title: String, content: String) {
         self.init(image: Image(imageNamed), accentColor: accentColor, title: title, content: content)
     }
     
@@ -52,17 +52,21 @@ public struct WelcomeSheetPageRow: Identifiable, Decodable {
     
     /// Creates Welcome Sheet page row with given image, title and content. Tints image with specified colour.
     public init(uiImage: UIImage, accentUIColor: UIColor? = nil, title: String, content: String) {
-        self.init(image: Image(uiImage: uiImage), accentColor: accentUIColor?.toColor(), title: title, content: content)
+        if let systemSymbolName = uiImage.systemSymbolName() {
+            self.init(imageSystemName: systemSymbolName, accentUIColor: accentUIColor, title: title, content: content)
+        } else {
+            self.init(image: Image(uiImage: uiImage), accentColor: accentUIColor?.toColor(), title: title, content: content)
+        }
     }
     
     /// Creates Welcome Sheet page row with system image, given title and content. Tints image with specified colour.
-    public init(imageSystemName: String, accentUIColor: UIColor, title: String, content: String) {
-        self.init(image: Image(systemName: imageSystemName), accentColor: accentUIColor.toColor(), title: title, content: content)
+    public init(imageSystemName: String, accentUIColor: UIColor?, title: String, content: String) {
+        self.init(image: Image(systemName: imageSystemName), accentColor: accentUIColor?.toColor(), title: title, content: content)
     }
 
     /// Creates Welcome Sheet page row with image name, given title and content. Tints image with specified colour.
-    public init(imageNamed: String, accentUIColor: UIColor, title: String, content: String) {
-        self.init(image: Image(imageNamed), accentColor: accentUIColor.toColor(), title: title, content: content)
+    public init(imageNamed: String, accentUIColor: UIColor?, title: String, content: String) {
+        self.init(image: Image(imageNamed), accentColor: accentUIColor?.toColor(), title: title, content: content)
     }
     
     // V Universal initializers V

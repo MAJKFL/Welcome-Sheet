@@ -7,11 +7,8 @@
 
 import SwiftUI
 
-public class ModalWelcomeSheetUIHostingController: UIHostingController<WelcomeSheetView>, UIPopoverPresentationControllerDelegate {
-    var onDismiss: () -> Void
-    
+open class ModalWelcomeSheetUIHostingController: UIHostingController<WelcomeSheetView>, UIPopoverPresentationControllerDelegate {
     override internal init(rootView: WelcomeSheetView) {
-        self.onDismiss = rootView.onDismiss
         super.init(rootView: rootView)
         
         self.rootView.onDismiss = getOnDismiss(with: rootView.onDismiss)
@@ -21,9 +18,9 @@ public class ModalWelcomeSheetUIHostingController: UIHostingController<WelcomeSh
         presentationController?.delegate = self
     }
     
-    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") } // FIXME: Implement to make it work with storyboards
+    required public init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
-    public func presentationControllerDidDismiss(_ presentationController: UIPresentationController) { onDismiss() }
+    public func presentationControllerDidDismiss(_ presentationController: UIPresentationController) { rootView.onDismiss() }
     
     internal func getOnDismiss(with action: @escaping () -> Void) -> (() -> Void) {
         return { [weak self] in
