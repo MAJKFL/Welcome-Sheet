@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let welcomeSheetController = segue.destination as? WelcomeSheetController {
+        if let welcomeSheetController = segue.destination as? WelcomeSheetStoryboardController {
             welcomeSheetController.delegate = self
         }
     }

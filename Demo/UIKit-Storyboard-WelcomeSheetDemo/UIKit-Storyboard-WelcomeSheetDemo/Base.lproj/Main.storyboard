@@ -38,10 +38,10 @@
             </objects>
             <point key="canvasLocation" x="-474" y="-9"/>
         </scene>
-        <!--Welcome Sheet Controller-->
+        <!--Welcome Sheet Storyboard Controller-->
         <scene sceneID="g5V-Rl-cAY">
             <objects>
-                <viewController id="wSc-U9-mbO" customClass="WelcomeSheetController" customModule="WelcomeSheet" sceneMemberID="viewController">
+                <viewController id="wSc-U9-mbO" customClass="WelcomeSheetStoryboardController" customModule="WelcomeSheet" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hYR-T5-H5T">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
